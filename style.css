@@ -1,0 +1,14 @@
+html {
+    background-image: url("background.jpg");
+    background-color: rgb(29, 47, 244);
+}
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
+.content.title{
+    font-family: Marker Felt, fantasy;
+}
