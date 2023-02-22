@@ -1,4 +1,3 @@
-var have_pass = false
 
 function yes_4_pass() {
     var clicked = document.getElementById("yes 4 pass");
@@ -31,5 +30,7 @@ function solve() {
     var needed_credit_amount = document.getElementById("needed credit amount").value;
     var needed_credits = needed_credit_amount - credit_amount
     var days_needed = Math.ceil(needed_credits / cal())
-    alert("It should take "+days_needed+" days.")
+    var the_result = document.getElementById("the result");
+    the_result.style.display = "undefined"
+    the_result.innerText = "It'll take "+days_needed+" days to get your brawler"
 }

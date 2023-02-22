@@ -25,10 +25,14 @@ html {
 }
 
 .question{
-    display: flex;
     background: white;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 7px 7px 0 rgb(36, 143, 27);
+    border: 1px solid rgb(36, 143, 27);
+    line-height: 1.5em;
+}
+
+.result{
+    background: white;
     box-shadow: 7px 7px 0 rgb(36, 143, 27);
     border: 1px solid rgb(36, 143, 27);
     line-height: 1.5em;
