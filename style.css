@@ -65,7 +65,7 @@ html {
 }
 
 
-.yes.button{
+.button{
     background-color: rgb(47, 255, 57);
     appearance: none;
     border: 1px solid rgba(27, 31, 35, 0.7);
@@ -89,63 +89,47 @@ html {
     vertical-align: middle;
     white-space: nowrap;
 }
-.no.button{
-    background-color: rgb(255, 47, 47);
-    appearance: none;
-    border: 1px solid rgba(27, 31, 35, 0.7);
-    border-radius: 6px;
-    box-shadow: rgb(27 31 35 / 10%) 0 1px 0;
-    box-sizing: border-box;
-    color: black;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Comic Sans MS, Comic Sans, sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: middle;
-    white-space: nowrap;
+.yes{
+    background-color: rgb(47, 255, 57);
 }
 
 .yes.clicked{
     background-color: rgb(32, 167, 39);
 }
+
+.no{
+    background-color: rgb(255, 47, 47);
+}
+
 .no.clicked{
     background-color: rgb(156, 30, 30);
 }
 
-.done.button{
+.done{
     background-color: rgb(47, 255, 57);
-    appearance: none;
-    border: 1px solid rgba(27, 31, 35, 0.7);
-    border-radius: 6px;
-    box-shadow: rgb(27 31 35 / 10%) 0 1px 0;
-    box-sizing: border-box;
-    color: black;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Comic Sans MS, Comic Sans, sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    padding: 6px 16px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: middle;
-    white-space: nowrap;
 }
 
+.done.clicked{
+    background-color: rgb(32, 167, 39);
+}
 
+.restart{
+    background-color: rgb(255, 179, 47);
+}
+
+.restart.clicked{
+    background-color: rgb(185, 130, 33);
+}
+
+.content.restart_holder{
+    display: flex;
+    margin-bottom: 5px;
+    padding: 5px 20px;
+    justify-content: center;
+    background: white;
+    box-shadow: 7px 7px 0 rgb(36, 143, 27);
+    border: 1px solid rgb(36, 143, 27);
+    line-height: 1.5em;
+}
 
 

@@ -1,5 +1,6 @@
 
 function yes_4_pass() {
+    document.getElementById("restart button").className = "restart button"
     var clicked = document.getElementById("yes 4 pass");
     clicked.className = "yes button clicked"
     var not_clicked = document.getElementById("no 4 pass");
@@ -8,11 +9,33 @@ function yes_4_pass() {
 }
 
 function no_4_pass() {
+    document.getElementById("restart button").className = "restart button"
     var clicked = document.getElementById("no 4 pass");
     clicked.className = "no button clicked"
     var not_clicked = document.getElementById("yes 4 pass");
     not_clicked.className = "yes button"
     have_pass = false
+}
+
+function restart() {
+    document.getElementById("credit amount").value = ""
+    document.getElementById("needed credit amount").value = ""
+    document.getElementById("no 4 pass").className = "no button"
+    document.getElementById("yes 4 pass").className = "yes button"
+    document.getElementById("restart button").className = "restart button clicked"
+    document.getElementById("done button").value = "Done"
+    document.getElementById("done button").className = "done button"
+    document.getElementById("the result").innerHTML = "Results will be here."
+}
+
+function check() {
+    if(document.getElementById("yes 4 pass").className == "yes button" && document.getElementById("no 4 pass").className == "no button")
+        return true
+    if (document.getElementById("credit amount").value == "")
+        return true
+    if (document.getElementById("needed credit amount").value == "")
+        return true
+    return false
 }
 
 function cal() {
@@ -29,9 +52,17 @@ function solve() {
     var credit_amount = document.getElementById("credit amount").value;
     var needed_credit_amount = document.getElementById("needed credit amount").value;
     var needed_credits = needed_credit_amount - credit_amount
+    if(check())
+    {
+        alert("You haven't answered all questions!")
+        return 0
+    }
+    document.getElementById("done button").value = "WOO!"
+    document.getElementById("done button").className = "done button clicked"
     var one_day_cre = cal()
     var days_needed = Math.ceil(needed_credits / one_day_cre)
     var the_result = document.getElementById("the result");
-    the_result.style.display = "undefined"
-    the_result.innerHTML = "It'll take "+days_needed+" days to get your brawler <br> You'll get around "+Math.floor(one_day_cre*145)+" ~ "+Math.floor(one_day_cre*229)+" coins"
+    the_result.innerHTML = `It'll take ${days_needed} days to get your brawler`
+    the_result.innerHTML += `<br>`
+    the_result.innerHTML += `You'll get around ${Math.floor(one_day_cre*145)} ~ ${Math.floor(one_day_cre*229)} coins`
 }
