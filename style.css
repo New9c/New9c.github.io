@@ -1,14 +1,65 @@
 html {
     background-image: url("background.jpg");
     background-color: rgb(29, 47, 244);
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
 .content{
+    background-color: rgba(255, 255, 255, 0.4);
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    border-radius: 5px;
+    padding: 20px 20px ;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.title{
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Comic Sans MS, Comic Sans, cursive;
+    font-family: Marker Felt, fantasy;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
-.content.title{
-    font-family: Marker Felt, fantasy;
+.question{
+    display: flex;
+    background: white;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 7px 7px 0 rgb(36, 143, 27);
+    border: 1px solid rgb(36, 143, 27);
+    line-height: 1.5em;
 }
+
+.wrapper{
+    max-width: 700px;
+    padding: 0 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container{
+    background-size: 35px auto;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.content.disclaimer{
+    display: flex;
+    margin-bottom: 5px;
+    padding: 5px 20px;
+    justify-content: center;
+}
+.content.top_reduce{
+    margin-top: 5px;
+}
+
+
+
+

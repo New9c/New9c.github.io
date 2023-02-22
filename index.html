@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="style.css"/>
+    <script src="main.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -9,9 +10,35 @@
   </head>
   <body>
     <main>
-        <h1 class="content title">BRAWL PREDICTOR</h1>  
-        <p class="content">BRAWL STARS!</p>
-        
+        <h1 class="title">BRAWL PREDICTOR</h1> 
+        <div class="container">
+            
+            <div class="wrapper">
+                <p class="content disclaimer">
+                *** EPIC DISCLAIMER ***
+                </p>
+                <p class="content top_reduce">
+                    This algorithm is FAR from perfect, specifics are written later. Just know that I do not want 
+                    to be held accountable for any actions you make because of the results.
+                    <br>
+                    <br>
+                    Hello! This algorithm predicts (or tries to predict) when you'll get your new starr road brawler.
+                    <br>
+                    <br>
+                    I recommend using this right after you've done your daily quests or right before new daily quests spawn
+                    for the best accuracy.
+                </p>
+            </div>
+            <div class="wrapper">
+                <div class="content"> 
+                    <label for="credit amount">Credit amount(bottom left of the brawler's face):</label><br>
+                    <input type="text" id="credit amount"><br>
+                    <label for="needed credit amount">Needed credit amount(bottom right of the brawler's face): </label><br>
+                    <input type="text" id="needed credit amount"><br>
+                    <input type="button" value="Submit" onclick="credits()">
+                </div>
+            </div>
+        </div> 
     </main>
   </body>
 </html>
