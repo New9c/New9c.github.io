@@ -8,7 +8,7 @@ html {
 }
 .content{
     background-color: rgba(255, 255, 255, 0.4);
-    font-family: Comic Sans MS, Comic Sans, sans-serif;
+    font-family: lilita one, Comic Sans MS, sans-serif;
     border-radius: 5px;
     padding: 20px 20px ;
     margin-bottom: 20px;
@@ -20,7 +20,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Marker Felt, fantasy;
+    font-family: lilita one, Marker Felt, fantasy;
     margin-bottom: 20px;
     margin-top: 20px;
     font-size: 40px
@@ -85,7 +85,7 @@ html {
     color: black;
     cursor: pointer;
     display: inline-block;
-    font-family: Comic Sans MS, Comic Sans, sans-serif;
+    font-family: lilita one, Comic Sans MS, sans-serif;
     font-size: 17px;
     font-weight: 600;
     line-height: 20px;
