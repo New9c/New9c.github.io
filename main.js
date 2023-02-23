@@ -1,3 +1,11 @@
+function make_brawler_question() {
+    document.getElementById("the good shit").innerHTML += "<div class='content starting_questions' id='brawler question'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("brawler question").innerHTML += "<label for='starting question 2'>Choose an option</label><br><br>"
+    document.getElementById("brawler question").innerHTML += "<input class='standard button' type='button' value='Standard Calculation' id='standard' onclick=''><br><br>"
+    document.getElementById("brawler question").innerHTML += "<input class='fast button' type='button' value='Fast Calculation: less questions, less time, less accurate' id='standard' onclick=''><br><br>"
+}
+
 function make_result_place() {
     document.getElementById("the good shit").innerHTML += "<div class='content result' id='the result'> "
     document.getElementById("the good shit").innerHTML += "</div>"

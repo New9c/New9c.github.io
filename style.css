@@ -37,6 +37,12 @@ html {
     border: 1px solid rgb(36, 143, 27);
     line-height: 1.5em;
 }
+.starting_questions{
+    background: white;
+    box-shadow: 7px 7px 0 rgb(201, 178, 0);
+    border: 1px solid rgb(201, 178, 0);
+    line-height: 1.5em;
+}
 
 .wrapper{
     max-width: 700px;
@@ -60,6 +66,7 @@ html {
     padding: 5px 20px;
     justify-content: center;
 }
+
 .content.top_reduce{
     margin-top: 5px;
 }
@@ -132,4 +139,19 @@ html {
     line-height: 1.5em;
 }
 
+.brawler{
+    background-color: rgb(47, 147, 255);
+}
+
+.future_days{
+    background-color: rgb(255, 47, 78);
+}
+
+.standard{
+    background-color: rgb(74, 131, 254);
+}
+
+.fast{
+    background-color: rgb(255, 255, 0);
+}
 
