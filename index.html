@@ -35,9 +35,9 @@
                 </div>
                 <div class="content question"> 
                     <label for="credit amount">Credit amount(bottom left of the brawler's face):</label><br>
-                    <input type="text" id="credit amount"><br>
+                    <input type="text" id="credit amount" onchange="restart_ready()"><br>
                     <label for="needed credit amount">Needed credit amount(bottom right of the brawler's face): </label><br>
-                    <input type="text" id="needed credit amount"><br>
+                    <input type="text" id="needed credit amount" onchange="restart_ready()"><br>
                     <label for="have pass">Do you have the brawl pass this season? </label><br>
                     <input class="yes button" type="button" value="Yes" id="yes 4 pass" onclick="yes_4_pass()">
                     <input class="no button" type="button" value="No" id="no 4 pass" onclick="no_4_pass()">

@@ -17,6 +17,10 @@ function no_4_pass() {
     have_pass = false
 }
 
+function restart_ready() {
+    document.getElementById("restart button").className = "restart button"
+}
+
 function restart() {
     document.getElementById("credit amount").value = ""
     document.getElementById("needed credit amount").value = ""
