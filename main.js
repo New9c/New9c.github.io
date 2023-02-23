@@ -3,7 +3,25 @@ function make_brawler_question() {
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("brawler question").innerHTML += "<label for='starting question 2'>Choose an option</label><br><br>"
     document.getElementById("brawler question").innerHTML += "<input class='standard button' type='button' value='Standard Calculation' id='standard' onclick=''><br><br>"
-    document.getElementById("brawler question").innerHTML += "<input class='fast button' type='button' value='Fast Calculation: less questions, less time, less accurate' id='standard' onclick=''><br><br>"
+    document.getElementById("brawler question").innerHTML += "<input class='fast button' type='button' value='Fast Calculation' id='fast' onclick='make_brawler_fast_questions()'><br><br>"
+    window.scrollBy(0, 500);
+}
+
+function make_brawler_fast_questions() {
+    document.getElementById("the good shit").innerHTML += "<div class='content restart_holder' id='restart_holder'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("restart_holder").innerHTML += "<input class='restart button clicked' type='button' value='Restart' id='restart button' onclick='restart()'>"
+    document.getElementById("the good shit").innerHTML += "<div class='content question' id='brawler fast questions'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("brawler fast questions").innerHTML += "<label for='credit amount'>Credit amount(bottom left of the brawler's face):</label><br>"
+    document.getElementById("brawler fast questions").innerHTML += "<input type='text' id='credit amount' onchange='restart_ready()'><br>"
+    document.getElementById("brawler fast questions").innerHTML += "<label for='needed credit amount'>Needed credit amount(bottom right of the brawler's face): </label><br>"
+    document.getElementById("brawler fast questions").innerHTML += "<input type='text' id='needed credit amount' onchange='restart_ready()'><br>"
+    document.getElementById("brawler fast questions").innerHTML += "<label for='have pass'>Do you have the brawl pass this season? </label><br>"
+    document.getElementById("brawler fast questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='yes 4 pass' onclick='yes_4_pass()'>"
+    document.getElementById("brawler fast questions").innerHTML += "<input class='no button' type='button' value='No' id='no 4 pass' onclick='no_4_pass()'><br><br>"
+    document.getElementById("brawler fast questions").innerHTML += "<input class='done button'  type='button' value='Done' id='done button' onclick='solve()'>"
+    window.scrollBy(0, 500);
 }
 
 function make_result_place() {
