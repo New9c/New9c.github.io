@@ -1,3 +1,7 @@
+function make_result_place() {
+    document.getElementById("the good shit").innerHTML += "<div class='content result' id='the result'> "
+    document.getElementById("the good shit").innerHTML += "</div>"
+}
 
 function yes_4_pass() {
     document.getElementById("restart button").className = "restart button"
@@ -65,8 +69,10 @@ function solve() {
     document.getElementById("done button").className = "done button clicked"
     var one_day_cre = cal()
     var days_needed = Math.ceil(needed_credits / one_day_cre)
+    make_result_place()
     var the_result = document.getElementById("the result");
     the_result.innerHTML = `It'll take ${days_needed} days to get your brawler`
     the_result.innerHTML += `<br>`
     the_result.innerHTML += `You'll get around ${Math.floor(one_day_cre*145)} ~ ${Math.floor(one_day_cre*229)} coins`
+    window.scrollBy(0, 500);
 }
