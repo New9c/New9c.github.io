@@ -1,4 +1,7 @@
 function make_brawler_question() {
+    if(document.getElementById("brawler button").className == "brawler button clicked")
+        return 0
+    document.getElementById("brawler button").className = "brawler button clicked"
     document.getElementById("the good shit").innerHTML += "<div class='content starting_questions' id='brawler question'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("brawler question").innerHTML += "<label for='starting question 2'>Choose an option</label><br><br>"
@@ -8,6 +11,9 @@ function make_brawler_question() {
 }
 
 function make_brawler_fast_questions() {
+    if(document.getElementById("fast").className == "fast button clicked")
+        return 0
+    document.getElementById("fast").className = "fast button clicked"
     document.getElementById("the good shit").innerHTML += "<div class='content restart_holder' id='restart_holder'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("restart_holder").innerHTML += "<input class='restart button clicked' type='button' value='Restart' id='restart button' onclick='restart()'>"
