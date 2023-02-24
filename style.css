@@ -29,20 +29,20 @@ html {
 
 .question{
     background: white;
-    box-shadow: 7px 7px 0 rgb(36, 143, 27);
+    box-shadow: 4px 4px 0 rgb(36, 143, 27);
     border: 1px solid rgb(36, 143, 27);
     line-height: 1.5em;
 }
 
 .result{
     background: white;
-    box-shadow: 7px 7px 0 rgb(36, 143, 27);
+    box-shadow: 4px 4px 0 rgb(36, 143, 27);
     border: 1px solid rgb(36, 143, 27);
     line-height: 1.5em;
 }
 .starting_questions{
     background: white;
-    box-shadow: 7px 7px 0 rgb(201, 178, 0);
+    box-shadow: 4px 4px 0 rgb(201, 178, 0);
     border: 1px solid rgb(201, 178, 0);
     line-height: 1.5em;
 }
@@ -101,6 +101,7 @@ html {
     vertical-align: middle;
     white-space: nowrap;
 }
+
 .yes{
     background-color: rgb(47, 255, 57);
 }
@@ -157,6 +158,34 @@ html {
 
 .fast{
     background-color: rgb(255, 255, 0);
+}
+
+.rare{
+    background-color: rgb(67, 236, 0);
+}
+
+.super_rare{
+    background-color: rgb(23, 74, 255);
+}
+
+.epic{
+    background-color: rgb(166, 23, 255);
+}
+
+.mythic{
+    background-color: rgb(255, 23, 23);
+}
+
+.legendary{
+    background-color: rgb(255, 240, 23);
+}
+
+.chromatic{
+    background: linear-gradient(45deg, rgb(234, 45, 255),rgb(255, 47, 47), rgb(255, 140, 0), rgb(255, 238, 0));
+}
+
+.starting{
+    background-color: rgb(23, 224, 255);
 }
 
 

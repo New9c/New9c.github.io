@@ -11,9 +11,9 @@
   <body>
     <main>
         <h1 class="title">BRAWL PREDICTOR</h1> 
-        <div class="container">
+        <div class="container" id="container">
             
-            <div class="wrapper">
+            <div class="wrapper" id="disclaimer">
                 <p class="content disclaimer">
                 *** EPIC DISCLAIMER ***
                 </p>
@@ -27,14 +27,12 @@
                     <br>
                     I recommend using this right after you've done your daily quests or right before new daily quests spawn
                     for the best accuracy.
+                    <br>
+                    <br>
+                    <input class="start button" type="button" value="Let's brawl!" id="start" onclick="start_everything()">
                 </p>
             </div>
             <div class="wrapper" id="the good shit">
-                <div class="content starting_questions"> 
-                    <label for="starting question 1">What do you wanna do?</label><br><br>
-                    <input class="brawler button" type="button" value="Tell me when I'll get my new brawler" id="brawler button" onclick="make_brawler_question()"><br><br>
-                    <input class="future_days button" type="button" value="Tell me the rewards I'll get in ? days" id="future_days button" onclick="make_future_days_question()">
-                </div>
             </div>
         </div> 
     </main>
