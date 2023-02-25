@@ -66,10 +66,10 @@ function make_brawler_standard_questions(credits_needed) {
     document.getElementById("the good shit").innerHTML += "<div class='content question' id='brawler standard questions'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("brawler standard questions").innerHTML += "<input class='restart button disabled' type='button' value='Restart' id='restart button' onclick='restart()'><br><br>"
-    document.getElementById("brawler standard questions").innerHTML += "<label for='credit amount'>Credit amount(bottom left of the brawler's face):</label><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<label for='credit amount'>Credit amount (bottom left of the brawler's face):</label><br>"
     document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='credit amount' oninput='restart_ready()'> credits<br><br>"
     needed_credit_amount = credits_needed;
-    document.getElementById("brawler standard questions").innerHTML += "<label for='current token amount'>Current token amount(left bottom corner): </label><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<label for='current token amount'>Current token amount (left bottom corner): </label><br>"
     document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='current token amount' oninput='restart_ready()'> tokens<br><br>"
     document.getElementById("brawler standard questions").innerHTML += "<label for='tier'>Which tier are you at? (Use 69+ if higher than 69)</label>"
     document.getElementById("brawler standard questions").innerHTML += "<p id='slider value'>35</p>"
@@ -137,6 +137,64 @@ function make_result_place() {
     document.getElementById("the good shit").innerHTML += "<div class='content result' id='the result'> "
     document.getElementById("the good shit").innerHTML += "</div>"
 }
+
+function make_end_place(ottf) {
+    document.getElementById("the good shit").innerHTML += "<div class='content result' id='endnote'> "
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("endnote").innerHTML += "Thanks for using my website! You can leave now, or reload the page to use it again, or find out more about the code's flaws.<br>"
+    if(ottf==1)
+        document.getElementById("endnote").innerHTML += `<input class="assumptions button" type="button" value="Assumptions & The Unpredictable" id="assumptions" onclick="assumptions(1)"></input>`
+    else if (ottf==2)
+        document.getElementById("endnote").innerHTML += `<input class="assumptions button" type="button" value="Assumptions & The Unpredictable" id="assumptions" onclick="assumptions(2)"></input>`
+}
+
+function assumptions(ottf) {
+    if(ottf==1)
+    {
+        document.getElementById("endnote").innerHTML = ``
+        document.getElementById("endnote").innerHTML += `Assumptions:<br>`
+        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked(+map maker)<br>`
+        document.getElementById("endnote").innerHTML += `* Uses average of all tokens collected in a week => thinks every day of the week is the same => less reliable when it predicts you'll get the brawler in <7 days.<br>`
+        document.getElementById("endnote").innerHTML += `* No mid-way brawl pass purchase (quite common for F2P)<br>`
+        document.getElementById("endnote").innerHTML += `* Optimal token collecting by player<br>`
+        document.getElementById("endnote").innerHTML += `* Believes the new season quests will be done within the same week you received them<br>`
+        document.getElementById("endnote").innerHTML += `* All other season quests are done<br>`
+        document.getElementById("endnote").innerHTML += `* Believes you'll get the brawler next season at most<br>`
+        document.getElementById("endnote").innerHTML += `<br>`
+        document.getElementById("endnote").innerHTML += `The Unpredictable:<br>`
+        document.getElementById("endnote").innerHTML += `* JACKPOT!<br>`
+        document.getElementById("endnote").innerHTML += `* Challenges / Surprise quests<br>`
+        document.getElementById("endnote").innerHTML += `* Trophy road rewards<br>`
+        document.getElementById("endnote").innerHTML += `* Higher ranks/experience (additional tokens)<br>`
+        document.getElementById("endnote").innerHTML += `* Double token/Coin showers events<br>`
+        document.getElementById("endnote").innerHTML += `* event.brawlstars.com`
+    }
+    else if(ottf==2)
+    {
+        document.getElementById("endnote").innerHTML = ``
+        document.getElementById("endnote").innerHTML += `Assumptions:<br>`
+        document.getElementById("endnote").innerHTML += `* Player is always at the end of the pass => simple, consistant, not accurate (Main issue)<br>`
+        document.getElementById("endnote").innerHTML += `* Player has just gotten daily quests and finished them => 1 extra day could be added<br>`
+        document.getElementById("endnote").innerHTML += `<br>(The rest is the same as the standard version)<br>`
+        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked(+map maker)<br>`
+        document.getElementById("endnote").innerHTML += `* Uses average of all tokens collected in a week => thinks every day of the week is the same => less reliable when it predicts you'll get the brawler in <7 days.<br>`
+        document.getElementById("endnote").innerHTML += `* No mid-way brawl pass purchase (quite common for F2P)<br>`
+        document.getElementById("endnote").innerHTML += `* Optimal token collecting by player<br>`
+        document.getElementById("endnote").innerHTML += `* Believes the new season quests will be done within the same week you received them<br>`
+        document.getElementById("endnote").innerHTML += `* All other season quests are done<br>`
+        document.getElementById("endnote").innerHTML += `* Believes you'll get the brawler next season at most<br>`
+        document.getElementById("endnote").innerHTML += `<br>`
+        document.getElementById("endnote").innerHTML += `The Unpredictable:<br>`
+        document.getElementById("endnote").innerHTML += `* JACKPOT!<br>`
+        document.getElementById("endnote").innerHTML += `* Challenges / Surprise quests<br>`
+        document.getElementById("endnote").innerHTML += `* Trophy road rewards<br>`
+        document.getElementById("endnote").innerHTML += `* Higher ranks/experience (additional tokens)<br>`
+        document.getElementById("endnote").innerHTML += `* Double token/Coin showers events<br>`
+        document.getElementById("endnote").innerHTML += `* event.brawlstars.com`
+    }
+}
+
+
 
 function yes_4_pass() {
     document.getElementById("restart button").className = "restart button"
@@ -211,10 +269,14 @@ function restart() {
 
     try{
         document.getElementById("current token amount").value = ""
+        document.getElementById("days left").value = ""
+        document.getElementById("hours left").value = ""
         document.getElementById("tier").value = 35
         document.getElementById("slider value").innerHTML = "35"
         document.getElementById("no 4 pass 2").className = "no button"
         document.getElementById("yes 4 pass 2").className = "yes button"
+        document.getElementById("daily no").className = "no button"
+        document.getElementById("daily yes").className = "yes button"
     }catch(TypeError){}
     
 }
@@ -235,6 +297,8 @@ function check() {
         if(document.getElementById("daily yes").className == "yes button" && document.getElementById("daily no").className == "no button")
             return true
         if(document.getElementById("days left").value == "")
+            return true
+        if(document.getElementById("hours left").value == "")
             return true
     }catch(TypeError){}
 
@@ -592,6 +656,8 @@ function solve_brawler(type) {
         the_result.innerHTML += `<br>`
         the_result.innerHTML += `(Min: Unlocked all end of pass rewards without a full power point bank. Max: Vice Versa)`
     }
+    make_end_place(type)
+
 }
 
 function solve_future_days(type) {

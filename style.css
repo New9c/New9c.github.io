@@ -198,6 +198,9 @@ html {
 .tier{
     min-width: 280px;
 }
+.assumptions{
+    background-color: rgb(255, 145, 0);
+}
 
 html .button.disabled{
     opacity: 0.7;
