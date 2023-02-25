@@ -18,7 +18,7 @@ function make_question(type) {
     document.getElementById("tracker").innerHTML += `${things[0]} >`
     document.getElementById("the good shit").innerHTML += `<div class="content starting_questions" id="${things[1]} question">`
     document.getElementById("the good shit").innerHTML += "</div>"
-    document.getElementById(`${things[1]} question`).innerHTML += "<label for='starting question 2'>Choose an option</label><br><br>"
+    document.getElementById(`${things[1]} question`).innerHTML += "<label for='starting question 2'>Choose an option (Fast = less questions & less accurate)</label><br><br>"
     document.getElementById(`${things[1]} question`).innerHTML += `<input class="standard button" type="button" value="Standard Calculation" id="standard" onclick="make_${things[1]}_question(1)"><br>`
     document.getElementById(`${things[1]} question`).innerHTML += `<input class="fast button" type="button" value="Fast Calculation" id="fast" onclick="make_${things[1]}_question(2)"><br>`
 }
@@ -71,16 +71,21 @@ function make_brawler_standard_questions(credits_needed) {
     needed_credit_amount = credits_needed;
     document.getElementById("brawler standard questions").innerHTML += "<label for='current token amount'>Current token amount(left bottom corner): </label><br>"
     document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='current token amount' oninput='restart_ready()'><br><br>"
-    document.getElementById("brawler standard questions").innerHTML += "<label for='tier'>Which tier are you at?(Use 70 if higher than 69): </label>"
+    document.getElementById("brawler standard questions").innerHTML += "<label for='tier'>Which tier are you at? (Use 69+ if higher than 69)</label>"
     document.getElementById("brawler standard questions").innerHTML += "<p id='slider value'>35</p>"
     document.getElementById("brawler standard questions").innerHTML += "<input type='range' min='0' max='70' class='tier' id='tier' oninput='put_slider_value()'><br><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<label for='days left'>How many days till season ends? (only days, no hours, no rounding)</label><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='days left' oninput='restart_ready()'><br><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<label for='days left'>Are there any daily quests you can do right now?</label><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='daily yes' onclick='daily_yes()'> "
+    document.getElementById("brawler standard questions").innerHTML += "<input class='no button' type='button' value='No' id='daily no' onclick='daily_no()'><br><br>"
     document.getElementById("brawler standard questions").innerHTML += "<label for='have pass'>Do you have the brawl pass this season? </label><br>"
     document.getElementById("brawler standard questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='yes 4 pass' onclick='yes_4_pass()'> "
     document.getElementById("brawler standard questions").innerHTML += "<input class='no button' type='button' value='No' id='no 4 pass' onclick='no_4_pass()'><br><br>"
     document.getElementById("brawler standard questions").innerHTML += "<label for='have pass'>Will you have the brawl pass right away next season? </label><br>"
     document.getElementById("brawler standard questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='yes 4 pass 2' onclick='yes_4_pass_2()'> "
     document.getElementById("brawler standard questions").innerHTML += "<input class='no button' type='button' value='No' id='no 4 pass 2' onclick='no_4_pass_2()'><br><br>"
-    document.getElementById("brawler standard questions").innerHTML += "<input class='done button'  type='button' value='Done' id='done button' onclick=''>"
+    document.getElementById("brawler standard questions").innerHTML += "<input class='done button'  type='button' value='Done' id='done button' onclick='solve_brawler(1)'>"
 }
 
 function put_slider_value(){
@@ -167,6 +172,24 @@ function no_4_pass_2() {
     have_pass_2 = false
 }
 
+function daily_yes() {
+    document.getElementById("restart button").className = "restart button"
+    var clicked = document.getElementById("daily yes");
+    clicked.className = "yes button clicked"
+    var not_clicked = document.getElementById("daily no");
+    not_clicked.className = "no button"
+    daily_ava = true
+}
+
+function daily_no() {
+    document.getElementById("restart button").className = "restart button"
+    var clicked = document.getElementById("daily no");
+    clicked.className = "no button clicked"
+    var not_clicked = document.getElementById("daily yes");
+    not_clicked.className = "yes button"
+    daily_ava = false
+}
+
 function restart_ready() {
     document.getElementById("restart button").className = "restart button"
 }
@@ -207,6 +230,10 @@ function check() {
             return true
         if(document.getElementById("yes 4 pass 2").className == "yes button" && document.getElementById("no 4 pass 2").className == "no button")
             return true
+        if(document.getElementById("daily yes").className == "yes button" && document.getElementById("daily no").className == "no button")
+            return true
+        if(document.getElementById("days left").value == "")
+            return true
     }catch(TypeError){}
 
     try{
@@ -224,9 +251,16 @@ function cal() {
     else {week_seasonal = 250 * 4 + 500 * 2}
     var one_week_tok = day * 7 + week_seasonal + weekend_events
     var one_day_tok = one_week_tok / 7
-    var cal_day_end_rewards = one_day_tok/500
-    return cal_day_end_rewards
+    return one_day_tok
 }
+
+function season_end_cal() {
+    var day_left = document.getElementById("days left").value
+    if(daily_ava)
+        day_left += 1
+    return day_left
+}
+
 function solve_brawler(type) {
     if(check())
     {
@@ -235,17 +269,307 @@ function solve_brawler(type) {
     }
     var credit_amount = document.getElementById("credit amount").value;
     var needed_credits = needed_credit_amount - credit_amount
-    var one_day_cre = cal()*25
-    var days_needed = Math.ceil(needed_credits / one_day_cre)
+    if(type==2){
+        var one_day_cre = cal()/500*25
+        var days_needed = Math.ceil(needed_credits / one_day_cre)
+        var less_gold = Math.floor(days_needed*cal()/500*145)
+        var more_gold = Math.floor(days_needed*cal()/500*229)
+    }
+    if(type==1){
+        pass_arr = [0,
+            75, 75, 100, 150, 200, 300, 400, 400, 400, 400,
+            400, 400, 400, 400, 400, 400, 400, 400, 400, 400,
+            500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
+            500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
+            600, 600, 600, 600, 600, 600, 600, 600, 600, 600,
+            600, 600, 600, 600, 600, 600, 600, 600, 600, 600,
+            600, 600, 600, 600, 600, 600, 600, 600, 600, 600]
+        
+        credit_pass_arr = [95,
+            0, 0, 0, 95, 0, 0, 0, 95, 0, 0,
+            0, 95, 0, 0, 0, 95, 0, 0, 0, 95,
+            0, 0, 0, 0, 95, 0, 0, 0, 0, 95,
+            0, 0, 95, 0, 0, 0, 0, 95, 0, 0,
+            0, 0, 95, 0, 0, 0, 0, 0, 95, 0,
+            0, 0, 0, 95, 0, 0, 0, 95, 0, 0,
+            0, 0, 95, 0, 0, 0, 0, 95, 0, 0]
+        
+        gem_credit_pass_arr = [95,
+            0, 45, 0, 95, 45, 0, 0, 140, 0, 0,
+            0, 140, 0, 0, 45, 95, 0, 45, 0, 95,
+            0, 45, 0, 0, 140, 0, 0, 45, 0, 95,
+            0, 45, 95, 0, 0, 45, 0, 95, 0, 45,
+            0, 0, 95, 0, 0, 0, 45, 0, 95, 45,
+            0, 0, 0, 95, 0, 45, 0, 95, 0, 0,
+            0, 0, 95, 45, 0, 0, 0, 95, 0, 0]
+        
+        gold_pass_arr = [0,
+            0, 0, 640, 0, 0, 640, 0, 0, 640, 0,
+            0, 0, 640, 0, 0, 0, 0, 640, 0, 0,
+            0, 0, 0, 640, 0, 0, 0, 640, 0, 0,
+            0, 640, 0, 0, 0, 0, 640, 0, 0, 0,
+            640, 0, 0, 0, 640, 0, 0, 640, 0, 0,
+            640, 0, 0, 0, 0, 640, 0, 0, 0, 640,
+            0, 0, 0, 0, 0, 0, 640, 0, 0, 0]
+
+        gem_gold_pass_arr = [0,
+            0, 0, 975, 0, 0, 975, 0, 0, 975, 0,
+            0, 0, 975, 0, 0, 335, 0, 640, 335, 0,
+            0, 0, 335, 640, 0, 335, 0, 640, 0, 0,
+            0, 640, 0, 335, 0, 0, 640, 335, 0, 0,
+            640, 335, 0, 0, 640, 335, 0, 975, 0, 0,
+            640, 335, 0, 0, 0, 640, 0, 0, 0, 975,
+            0, 335, 0, 0, 0, 0, 640, 335, 0, 0]
+
+        job_done = false
+        total_done = false
+        all_gold_rewards = 0
+        this_tier_time = 0
+
+        one_day_tok = cal()
+        season_ends = season_end_cal()
+        season_ends = parseInt(season_ends)
+        cur_tok = document.getElementById("current token amount").value
+        cur_tok = parseInt(cur_tok)
+        available_tokens = season_ends * one_day_tok + cur_tok
+        tier_now = document.getElementById("tier").value
+        tier_now = parseInt(tier_now)
+        if (tier_now != 70)
+        {
+            tier_now = tier_now + 1
+            tier_now_s = tier_now
+            if (have_pass)
+            {
+                while(true)
+                {
+                    available_tokens -= pass_arr[tier_now]
+                    if (available_tokens <= 0)
+                        break
+                    needed_credits -= gem_credit_pass_arr[tier_now]
+                    all_gold_rewards += gem_gold_pass_arr[tier_now]
+                    if (needed_credits <= 0)
+                        break
+                    tier_now += 1
+                    if (tier_now > 70)
+                        break
+                }
+            }
+            else
+            {
+                while (true)
+                {
+                    available_tokens -= pass_arr[tier_now]
+                    if (available_tokens <= 0)
+                        break
+                    needed_credits -= credit_pass_arr[tier_now]
+                    all_gold_rewards += gold_pass_arr[tier_now]
+                    if (needed_credits <= 0)
+                        break
+                    tier_now += 1
+                    if (tier_now > 70)
+                        break
+                }
+            }
+            if(needed_credits <= 0)
+            {
+                the_sweet_tier = [tier_now, 1]
+                k = tier_now_s
+                needed_tier_tokens = 0
+                while (k <= tier_now)
+                {
+                    needed_tier_tokens += pass_arr[k]
+                    k += 1
+                }
+                time = (needed_tier_tokens - cur_tok) / one_day_tok
+                time_r = Math.ceil(time)
+
+                days_needed = time_r
+                less_gold = -1
+                more_gold = Math.floor(all_gold_rewards)
+
+                job_done = true
+            }
+        }
+        if (available_tokens <= 0)
+        {
+            tier = 0
+            if(have_pass_2)
+            {
+                while(true)
+                {
+                    needed_credits -= gem_credit_pass_arr[tier]
+                    all_gold_rewards += gem_gold_pass_arr[tier]
+                    if (needed_credits <= 0)
+                        break
+                    tier += 1
+                    if (tier > 70)
+                        break
+                }
+            }
+            else{
+                while(true)
+                {
+                    needed_credits -= credit_pass_arr[tier]
+                    all_gold_rewards += gold_pass_arr[tier]
+                    if (needed_credits <= 0)
+                        break
+                    tier += 1
+                    if (tier > 70)
+                        break
+                }
+            }
+            if (tier>70)
+            {
+                all_needed_tokens = 34500 + Math.ceil(needed_credits / 25) * 500
+                console.log(season_ends)
+                console.log("+")
+                console.log(all_needed_tokens)
+                console.log("/")
+                console.log(one_day_tok)
+                console.log("=")
+                
+                time = season_ends + all_needed_tokens / one_day_tok
+                console.log(time)
+                time_r = Math.ceil(time)
+
+                days_needed = time_r
+
+                all_gold_rewards += 229 * Math.ceil(needed_credits / 25)
+                not_full_pp_gold_m = 84 * Math.ceil(needed_credits / 25)
+
+                less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
+                more_gold = Math.floor(all_gold_rewards)
+            }
+            else
+            {
+                the_sweet_tier = [tier, 2]
+
+                i = 0
+                needed_tier_tokens = 0
+                while (i <= tier)
+                    needed_tier_tokens += pass_arr[i]
+                    i += 1
+                time = season_ends + needed_tier_tokens / one_day_tok
+                time_r = Math.ceil(time)
+
+                days_needed = time_r
+                less_gold = -1
+                more_gold = Math.floor(all_gold_rewards)
+            }
+        }
+        else if (job_done==false)
+        {
+            ori_season_ends = season_ends
+            season_ends = Math.floor(available_tokens / one_day_tok)
+            this_tier_time = ori_season_ends - season_ends
+            cur_tok = available_tokens % one_day_tok
+            time = (Math.ceil(needed_credits / 25) * 500 - cur_tok) / one_day_tok
+            time_r = Math.ceil(time)
+            if (time_r > season_ends)
+            {
+                needed_credits_2 = needed_credits - Math.floor((one_day_tok * season_ends + cur_tok) / 500) * 25
+                all_gold_rewards += 15 / 4 * season_ends
+                all_gold_rewards += 229 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
+                not_full_pp_gold_m = 84 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
+
+                tier = 0
+                if (have_pass_2)
+                {
+                    while (true)
+                    {
+                        needed_credits_2 -= gem_credit_pass_arr[tier]
+                        all_gold_rewards += gem_gold_pass_arr[tier]
+                        if (needed_credits_2 <= 0)
+                            break
+                        tier += 1
+                        if (tier > 70)
+                            break
+                    }
+                }
+                else
+                {
+                    while (true)
+                    {
+                        needed_credits_2 -= credit_pass_arr[tier]
+                        all_gold_rewards += gold_pass_arr[tier]
+                        if (needed_credits_2 <= 0)
+                            break
+                        tier += 1
+                        if (tier > 70)
+                            break
+                    }
+                }
+                if (tier > 70)
+                {
+                    all_needed_tokens = 34500 + Math.ceil(needed_credits_2 / 25) * 500
+                    time = ori_season_ends + all_needed_tokens / one_day_tok
+                    time_r = Math.ceil(time)
+
+                    days_needed = time_r
+
+                    all_gold_rewards += 15 / 4 * (time_r - ori_season_ends)
+                    all_gold_rewards += 229 * Math.ceil(needed_credits_2 / 25)
+                    not_full_pp_gold_m += 84 * Math.ceil(needed_credits_2 / 25)
+
+                    less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
+                    more_gold = Math.floor(all_gold_rewards)
+                }
+                else
+                {
+                    the_sweet_tier = [tier, 2]
+
+                    i = 0
+                    needed_tier_tokens = 0
+                    while (i <= tier)
+                    {
+                        needed_tier_tokens += pass_arr[i]
+                        i += 1
+                    }
+                    time = ori_season_ends + needed_tier_tokens / one_day_tok
+                    time_r = Math.ceil(time)
+
+                    days_needed = time_r
+                    less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
+                    more_gold = Math.floor(all_gold_rewards)
+                }
+            }
+            else
+            {
+                days_needed = time_r + this_tier_time
+
+                all_gold_rewards += 229 * Math.ceil(needed_credits / 25)
+                not_full_pp_gold_m = 84 * Math.ceil(needed_credits / 25)
+
+                less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
+                more_gold = Math.floor(all_gold_rewards)
+            }
+        }
+    }
     document.getElementById("the good shit").innerHTML = ""
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
-    document.getElementById("tracker").innerHTML += "New Brawler > Fast > Rarity > Results"
+    document.getElementById("tracker").innerHTML += "New Brawler > Fast > Rarity > Questions > Results"
     make_result_place()
     var the_result = document.getElementById("the result");
-    the_result.innerHTML = `It'll take ${days_needed} days to get your brawler`
+    try
+    {
+        if(the_sweet_tier[1]=='1')
+            the_result.innerHTML += `You'll get your brawler at tier ${the_sweet_tier[0]} this season.<br>`
+        else
+            the_result.innerHTML += `You'll get your brawler at tier ${the_sweet_tier[0]} next season.<br>`
+    }catch(ReferenceError){}
+        
+    the_result.innerHTML += `It'll take around ${days_needed} days to get your brawler.`
     the_result.innerHTML += `<br>`
-    the_result.innerHTML += `You'll get around ${Math.floor(days_needed*145)} ~ ${Math.floor(days_needed*229)} coins`
+
+    if(less_gold < 0)
+        the_result.innerHTML += `You'll get around ${more_gold} coins.`
+    else
+    {
+        the_result.innerHTML += `You'll get around ${less_gold} ~ ${more_gold} coins.`
+        the_result.innerHTML += `<br>`
+        the_result.innerHTML += `(Min: Unlocked all end of pass rewards without a full power point bank. Max: Vice Versa)`
+    }
 }
 
 function solve_future_days(type) {
@@ -260,7 +584,7 @@ function solve_future_days(type) {
     document.getElementById("the good shit").innerHTML = ""
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
-    document.getElementById("tracker").innerHTML += "Days of Rewards > Fast > Results"
+    document.getElementById("tracker").innerHTML += "Days of Rewards > Fast > Questions > Results"
     make_result_place()
     var the_result = document.getElementById("the result");
     the_result.innerHTML = `In ${days_asked} days, you'll get around ${Math.floor(days_asked*one_day_cre)} credits.`
