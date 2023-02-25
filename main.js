@@ -67,15 +67,17 @@ function make_brawler_standard_questions(credits_needed) {
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("brawler standard questions").innerHTML += "<input class='restart button disabled' type='button' value='Restart' id='restart button' onclick='restart()'><br><br>"
     document.getElementById("brawler standard questions").innerHTML += "<label for='credit amount'>Credit amount(bottom left of the brawler's face):</label><br>"
-    document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='credit amount' oninput='restart_ready()'><br><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='credit amount' oninput='restart_ready()'> credits<br><br>"
     needed_credit_amount = credits_needed;
     document.getElementById("brawler standard questions").innerHTML += "<label for='current token amount'>Current token amount(left bottom corner): </label><br>"
-    document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='current token amount' oninput='restart_ready()'><br><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='current token amount' oninput='restart_ready()'> tokens<br><br>"
     document.getElementById("brawler standard questions").innerHTML += "<label for='tier'>Which tier are you at? (Use 69+ if higher than 69)</label>"
     document.getElementById("brawler standard questions").innerHTML += "<p id='slider value'>35</p>"
     document.getElementById("brawler standard questions").innerHTML += "<input type='range' min='0' max='70' class='tier' id='tier' oninput='put_slider_value()'><br><br>"
-    document.getElementById("brawler standard questions").innerHTML += "<label for='days left'>How many days till season ends? (only days, no hours, no rounding)</label><br>"
-    document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='days left' oninput='restart_ready()'><br><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<label for='days left'>How many days & hours till season ends? </label><br>"
+    document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='days left' oninput='restart_ready()'> days<br>"
+    document.getElementById("brawler standard questions").innerHTML += "<input type='text' id='hours left' oninput='restart_ready()'> hours<br>"
+    document.getElementById("brawler standard questions").innerHTML += "(No hours = 0 hours. Round down minutes.)<br><br>"
     document.getElementById("brawler standard questions").innerHTML += "<label for='days left'>Are there any daily quests you can do right now?</label><br>"
     document.getElementById("brawler standard questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='daily yes' onclick='daily_yes()'> "
     document.getElementById("brawler standard questions").innerHTML += "<input class='no button' type='button' value='No' id='daily no' onclick='daily_no()'><br><br>"
@@ -261,6 +263,16 @@ function season_end_cal() {
     return day_left
 }
 
+function make_date(add_days) {
+    var targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + add_days);
+    var dd = targetDate.getDate();
+    var mm = targetDate.getMonth() + 1;
+    var yyyy = targetDate.getFullYear();
+
+    var dateString = `${yyyy}-${mm}-${dd}`
+    return dateString
+}
 function solve_brawler(type) {
     if(check())
     {
@@ -274,6 +286,7 @@ function solve_brawler(type) {
         var days_needed = Math.ceil(needed_credits / one_day_cre)
         var less_gold = Math.floor(days_needed*cal()/500*145)
         var more_gold = Math.floor(days_needed*cal()/500*229)
+        var tracke = "Fast"
     }
     if(type==1){
         pass_arr = [0,
@@ -544,13 +557,21 @@ function solve_brawler(type) {
                 more_gold = Math.floor(all_gold_rewards)
             }
         }
+        var tracke = "Standard"
+        if(daily_ava && days_needed>0)
+            days_needed-=1
+        hours = document.getElementById("hours left").value
+        hours = parseInt(hours)
+        if(hours<12 && days_needed>0)
+            days_needed-=1
     }
     document.getElementById("the good shit").innerHTML = ""
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
-    document.getElementById("tracker").innerHTML += "New Brawler > Fast > Rarity > Questions > Results"
+    document.getElementById("tracker").innerHTML += `New Brawler > ${tracke} > Rarity > Questions > Results`
     make_result_place()
     var the_result = document.getElementById("the result");
+    the_result.innerHTML += "Results:<br>"
     try
     {
         if(the_sweet_tier[1]=='1')
@@ -558,9 +579,10 @@ function solve_brawler(type) {
         else
             the_result.innerHTML += `You'll get your brawler at tier ${the_sweet_tier[0]} next season.<br>`
     }catch(ReferenceError){}
-        
-    the_result.innerHTML += `It'll take around ${days_needed} days to get your brawler.`
-    the_result.innerHTML += `<br>`
+    
+    
+    the_result.innerHTML += `It'll take around ${days_needed} days to get your brawler.<br>`
+    the_result.innerHTML += `(which is around ${make_date(days_needed)})<br><br>`
 
     if(less_gold < 0)
         the_result.innerHTML += `You'll get around ${more_gold} coins.`
