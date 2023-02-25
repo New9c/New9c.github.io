@@ -8,6 +8,7 @@ function start_everything(){
 }
 
 function make_brawler_question(type_sf){
+    the_brawler_name = ''
     if(type_sf == 1)
         var things = ["Standard", "standard"]
     if(type_sf == 2)
@@ -659,6 +660,7 @@ function solve_brawler(type) {
     {
         the_result.innerHTML += `You'll get around ${less_gold} ~ ${more_gold} coins.`
         the_result.innerHTML += `<br>`
+        the_result.innerHTML += `This includes coins on the pass and end of pass rewards.<br>Doesn't include power points on the pass converted to coins.<br>`
         the_result.innerHTML += `(Min: Unlocked all end of pass rewards without a full power point bank. Max: Vice Versa)`
     }
     make_end_place(type)
