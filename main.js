@@ -8,12 +8,13 @@ function start_everything(){
 }
 
 function make_brawler_question(type_sf){
-    the_brawler_name = ''
     if(type_sf == 1)
         var things = ["Standard", "standard"]
     if(type_sf == 2)
         var things = ["Fast", "fast"]
     document.getElementById("the good shit").innerHTML = ""
+    document.getElementById("the good shit").innerHTML += "<div class='' id='brawler name storage'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `${things[0]} > Rarity`
@@ -32,7 +33,8 @@ function make_brawler_question(type_sf){
 }
 
 function brawler_name(){
-    the_brawler_name = document.getElementById("brawler name").value
+    var the_brawler_name = document.getElementById("brawler name").value
+    document.getElementById("brawler name storage").className = the_brawler_name
     document.getElementById("wat rarity").innerHTML = `What rarity is ${the_brawler_name}?`
 }
 
@@ -52,9 +54,12 @@ function starting(text_4_tracker){
 
 function make_brawler_standard_questions(credits_needed) {
     the_rarity = make_the_rarity(credits_needed)
+    var the_brawler_name = document.getElementById("brawler name storage").className
     if (the_brawler_name == '')
         the_brawler_name = "the brawler"
     document.getElementById("the good shit").innerHTML = ""
+    document.getElementById("the good shit").innerHTML += `<div class='${the_brawler_name}' id='brawler name storage'>`
+    document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `Standard > ${the_rarity} > Questions`
@@ -93,9 +98,12 @@ function put_slider_value(){
 
 function make_brawler_fast_questions(credits_needed) {
     the_rarity = make_the_rarity(credits_needed)
+    var the_brawler_name = document.getElementById("brawler name storage").className
     if (the_brawler_name == '')
         the_brawler_name = "the brawler"
     document.getElementById("the good shit").innerHTML = ""
+    document.getElementById("the good shit").innerHTML += `<div class='${the_brawler_name}' id='brawler name storage'>`
+    document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `Fast > ${the_rarity} > Questions`
@@ -633,6 +641,9 @@ function solve_brawler(type) {
         if(hours<12 && days_needed>0)
             days_needed-=1
     }
+    var the_brawler_name = document.getElementById("brawler name storage").className
+    if (the_brawler_name == '')
+        the_brawler_name = "the brawler"
     document.getElementById("the good shit").innerHTML = ""
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
@@ -640,8 +651,7 @@ function solve_brawler(type) {
     make_result_place()
     var the_result = document.getElementById("the result");
     the_result.innerHTML += "Results:<br>"
-    if (the_brawler_name == '')
-        the_brawler_name = "your brawler"
+    
     try
     {
         if(the_sweet_tier[1]=='1')
