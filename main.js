@@ -28,8 +28,47 @@ function make_brawler_question(type_sf){
     document.getElementById("rarity question").innerHTML += `<input class='epic button' type='button' value='Epic' id='epic' onclick='make_brawler_${things[1]}_questions(925)'> `
     document.getElementById("rarity question").innerHTML += `<input class='mythic button' type='button' value='Mythic' id='mythic' onclick='make_brawler_${things[1]}_questions(1900)'> `
     document.getElementById("rarity question").innerHTML += `<input class='legendary button' type='button' value='Legendary' id='legendary' onclick='make_brawler_${things[1]}_questions(3800)'> `
-    document.getElementById("rarity question").innerHTML += `<input class='chromatic button' type='button' value='Chromatic' id='chromatic' onclick=''> `
+    document.getElementById("rarity question").innerHTML += `<input class='chromatic button' type='button' value='Chromatic' id='chromatic' onclick='chromatic()'> `
     document.getElementById("rarity question").innerHTML += `<input class="starting button" type="button" value="Starting Brawler" id="starting" onclick="starting('${things[0]}')">`
+}
+
+function chromatic(){
+    var the_brawler_name = document.getElementById("brawler name storage").className
+    if (the_brawler_name == '')
+        the_brawler_name = "the brawler"
+    document.getElementById("the good shit").innerHTML = ""
+    document.getElementById("the good shit").innerHTML += `<div class='${the_brawler_name}' id='brawler name storage'>`
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("tracker").innerHTML += `Chromatic > Questions`
+    document.getElementById("the good shit").innerHTML += "<div class='content result' id='chroma questions'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("chroma questions").innerHTML += "(There's actually no fast version for this, so you'll get here either way)<br><br>"
+    document.getElementById("chroma questions").innerHTML += "<input class='restart button disabled' type='button' value='Restart' id='restart button' onclick='restart()'><br><br>"
+    document.getElementById("chroma questions").innerHTML += `<label for='chroma amount'> Chroma Credits amount:</label><br>`
+    document.getElementById("chroma questions").innerHTML += "<input type='text' id='chroma amount' oninput='restart_ready()'> chroma credits<br><br>"
+    document.getElementById("chroma questions").innerHTML += `<label for='chroma amount'> Needed amount (bottom left number of ${the_brawler_name} right now:500, 1500, 4500):</label><br>`
+    document.getElementById("chroma questions").innerHTML += "<input type='text' id='needed chroma amount' oninput='restart_ready()'> chroma credits<br><br>"
+    document.getElementById("chroma questions").innerHTML += "<label for='current token amount'>Current token amount (left bottom corner): </label><br>"
+    document.getElementById("chroma questions").innerHTML += "<input type='text' id='current token amount' oninput='restart_ready()'> tokens<br><br>"
+    document.getElementById("chroma questions").innerHTML += "<label for='tier'>Which tier are you at? (Use 69+ if higher than 69)</label>"
+    document.getElementById("chroma questions").innerHTML += "<p id='slider value'>35</p>"
+    document.getElementById("chroma questions").innerHTML += "<input type='range' min='0' max='70' class='tier' id='tier' oninput='put_slider_value()'><br><br>"
+    document.getElementById("chroma questions").innerHTML += "<label for='days left'>How many days & hours till season ends? </label><br>"
+    document.getElementById("chroma questions").innerHTML += "<input type='text' id='days left' oninput='restart_ready()'> days<br>"
+    document.getElementById("chroma questions").innerHTML += "<input type='text' id='hours left' oninput='restart_ready()'> hours<br>"
+    document.getElementById("chroma questions").innerHTML += "(No hours = 0 hours. Round down minutes.)<br><br>"
+    document.getElementById("chroma questions").innerHTML += "<label for='days left'>Are there any daily quests you can do right now?</label><br>"
+    document.getElementById("chroma questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='daily yes' onclick='daily_yes()'> "
+    document.getElementById("chroma questions").innerHTML += "<input class='no button' type='button' value='No' id='daily no' onclick='daily_no()'><br><br>"
+    document.getElementById("chroma questions").innerHTML += "<label for='have pass'>Do you have the brawl pass this season? </label><br>"
+    document.getElementById("chroma questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='yes 4 pass' onclick='yes_4_pass()'> "
+    document.getElementById("chroma questions").innerHTML += "<input class='no button' type='button' value='No' id='no 4 pass' onclick='no_4_pass()'><br><br>"
+    document.getElementById("chroma questions").innerHTML += "<label for='have pass'>Will you have the brawl pass right away next season? </label><br>"
+    document.getElementById("chroma questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='yes 4 pass 2' onclick='yes_4_pass_2()'> "
+    document.getElementById("chroma questions").innerHTML += "<input class='no button' type='button' value='No' id='no 4 pass 2' onclick='no_4_pass_2()'><br><br>"
+    document.getElementById("chroma questions").innerHTML += "<input class='done button'  type='button' value='Done' id='done button' onclick='solve_chroma()'>"
 }
 
 function brawler_name(){
@@ -42,7 +81,7 @@ function starting(text_4_tracker){
     document.getElementById("the good shit").innerHTML = ""
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
-    document.getElementById("tracker").innerHTML += `${text_4_tracker} > Starting Brawler`
+    document.getElementById("tracker").innerHTML += `${text_4_tracker} > Starting Brawler (Result)`
     document.getElementById("the good shit").innerHTML += "<div class='content result' id='result'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("result").innerHTML += "For new players:<br>"
@@ -154,6 +193,12 @@ function make_end_place(ottf) {
         document.getElementById("endnote").innerHTML += "Bye! :D<br>"
         document.getElementById("endnote").innerHTML += `<input class="assumptions button" type="button" value="Assumptions & The Unpredictable" id="assumptions" onclick="assumptions(2)"></input>`
     }
+    else{
+        document.getElementById("endnote").innerHTML += "Note that this doesn't count a few ways you can get more progress, such as getting a Jackpot.<br>Click on the button below for more info.<br>"
+        document.getElementById("endnote").innerHTML += "If you want to start over, simply reload the page.<br>"
+        document.getElementById("endnote").innerHTML += "Bye! :D<br>"
+        document.getElementById("endnote").innerHTML += `<input class="assumptions button" type="button" value="Assumptions & The Unpredictable" id="assumptions" onclick="assumptions(3)"></input>`
+    }
 }
 
 function assumptions(ottf) {
@@ -196,6 +241,25 @@ function assumptions(ottf) {
         document.getElementById("endnote").innerHTML += `<br>`
         document.getElementById("endnote").innerHTML += `The Unpredictable:<br>`
         document.getElementById("endnote").innerHTML += `* Club League<br>`
+        document.getElementById("endnote").innerHTML += `* Masteries<br>`
+        document.getElementById("endnote").innerHTML += `* JACKPOT!<br>`
+        document.getElementById("endnote").innerHTML += `* Challenges / Surprise quests<br>`
+        document.getElementById("endnote").innerHTML += `* Trophy road rewards<br>`
+        document.getElementById("endnote").innerHTML += `* Higher ranks/experience (additional tokens)<br>`
+        document.getElementById("endnote").innerHTML += `* Double token/Coin showers events<br>`
+        document.getElementById("endnote").innerHTML += `* event.brawlstars.com`
+    }
+    else
+    {
+        document.getElementById("endnote").innerHTML = ``
+        document.getElementById("endnote").innerHTML += `Assumptions:<br>`
+        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked(+map maker)<br>`
+        document.getElementById("endnote").innerHTML += `* Uses average of all tokens collected in a week => thinks every day of the week is the same => less reliable when it predicts you'll get the brawler in <7 days.<br>`
+        document.getElementById("endnote").innerHTML += `* Optimal token collecting by player<br>`
+        document.getElementById("endnote").innerHTML += `* Believes the new season quests will be done within the same week you received them<br>`
+        document.getElementById("endnote").innerHTML += `* All other season quests are done<br>`
+        document.getElementById("endnote").innerHTML += `<br>`
+        document.getElementById("endnote").innerHTML += `The Unpredictable:<br>`
         document.getElementById("endnote").innerHTML += `* Masteries<br>`
         document.getElementById("endnote").innerHTML += `* JACKPOT!<br>`
         document.getElementById("endnote").innerHTML += `* Challenges / Surprise quests<br>`
@@ -267,27 +331,62 @@ function restart_ready() {
 }
 
 function restart() {
-    
-    document.getElementById("no 4 pass").className = "no button"
-    document.getElementById("yes 4 pass").className = "yes button"
     document.getElementById("restart button").className = "restart button disabled"
+    
+    
+    try{
+        document.getElementById("no 4 pass").className = "no button"
+    }catch(TypeError){}
+
+    try{
+        document.getElementById("yes 4 pass").className = "yes button"
+    }catch(TypeError){}
+    
     try{
         document.getElementById("credit amount").value = ""
     }catch(TypeError){}
 
     try{
-        document.getElementById("days asked").value = ""
+        document.getElementById("chroma amount").value = ""
+    }catch(TypeError){}
+
+    try{
+        document.getElementById("needed chroma amount").value = ""
     }catch(TypeError){}
 
     try{
         document.getElementById("current token amount").value = ""
+    }catch(TypeError){}
+
+    try{
         document.getElementById("days left").value = ""
+    }catch(TypeError){}
+
+    try{
         document.getElementById("hours left").value = ""
+    }catch(TypeError){}
+
+    try{
         document.getElementById("tier").value = 35
+    }catch(TypeError){}
+
+    try{
         document.getElementById("slider value").innerHTML = "35"
+    }catch(TypeError){}
+
+    try{
         document.getElementById("no 4 pass 2").className = "no button"
+    }catch(TypeError){}
+
+    try{
         document.getElementById("yes 4 pass 2").className = "yes button"
+    }catch(TypeError){}
+
+    try{
         document.getElementById("daily no").className = "no button"
+    }catch(TypeError){}
+
+    try{
         document.getElementById("daily yes").className = "yes button"
     }catch(TypeError){}
     
@@ -304,20 +403,38 @@ function check() {
     try{
         if(document.getElementById("current token amount").value == "")
             return true
-        if(document.getElementById("yes 4 pass 2").className == "yes button" && document.getElementById("no 4 pass 2").className == "no button")
-            return true
-        if(document.getElementById("daily yes").className == "yes button" && document.getElementById("daily no").className == "no button")
-            return true
-        if(document.getElementById("days left").value == "")
-            return true
-        if(document.getElementById("hours left").value == "")
+    }catch(TypeError){}
+
+    try{
+        if(document.getElementById("chroma amount").value == "")
             return true
     }catch(TypeError){}
 
     try{
-        if(document.getElementById("days asked").value == "")
+        if(document.getElementById("needed chroma amount").value == "")
             return true
     }catch(TypeError){}
+
+    try{
+        if(document.getElementById("yes 4 pass 2").className == "yes button" && document.getElementById("no 4 pass 2").className == "no button")
+            return true
+    }catch(TypeError){}
+    
+    try{
+        if(document.getElementById("daily yes").className == "yes button" && document.getElementById("daily no").className == "no button")
+            return true
+    }catch(TypeError){}
+
+    try{
+        if(document.getElementById("days left").value == "")
+            return true
+    }catch(TypeError){}
+
+    try{
+        if(document.getElementById("hours left").value == "")
+            return true
+    }catch(TypeError){}
+
 
     return false
 }
@@ -674,5 +791,308 @@ function solve_brawler(type) {
         the_result.innerHTML += `(Min: Unlocked all end of pass rewards without a full power point bank. Max: Vice Versa)`
     }
     make_end_place(type)
+
+}
+
+function solve_chroma() {
+    if(check())
+    {
+        alert("You haven't answered all questions!")
+        return 0
+    }
+    var chroma_credit_amount = document.getElementById("chroma amount").value;
+    chroma_credit_amount = parseInt(chroma_credit_amount)
+    var needed_chroma_credits = document.getElementById("needed chroma amount").value
+    needed_chroma_credits = parseInt(needed_chroma_credits)
+
+    var pass_arr = [0,
+        75, 75, 100, 150, 200, 300, 400, 400, 400, 400,
+        400, 400, 400, 400, 400, 400, 400, 400, 400, 400,
+        500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
+        500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
+        600, 600, 600, 600, 600, 600, 600, 600, 600, 600,
+        600, 600, 600, 600, 600, 600, 600, 600, 600, 600,
+        600, 600, 600, 600, 600, 600, 600, 600, 600, 600]
+    
+    var chroma_pass_arr = [0,
+        0, 0, 0, 0, 0, 0, 60, 0, 0, 0, 
+        40, 0, 0, 0, 0, 0, 40, 0, 0, 0, 
+        40, 0, 0, 0, 0, 0, 40, 0, 0, 0, 
+        40, 0, 0, 0, 40, 0, 0, 0, 0, 40,
+        0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 
+        0, 0, 0, 0, 40, 0, 0, 0, 40, 0,
+        0, 0, 0, 0, 40, 0, 0, 0, 0, 0]
+
+    var gold_pass_arr = [0,
+        0, 0, 640, 0, 0, 640, 0, 0, 640, 0,
+        0, 0, 640, 0, 0, 0, 0, 640, 0, 0,
+        0, 0, 0, 640, 0, 0, 0, 640, 0, 0,
+        0, 640, 0, 0, 0, 0, 640, 0, 0, 0,
+        640, 0, 0, 0, 640, 0, 0, 640, 0, 0,
+        640, 0, 0, 0, 0, 640, 0, 0, 0, 640,
+        0, 0, 0, 0, 0, 0, 640, 0, 0, 0]
+
+    var gem_gold_pass_arr = [0,
+        0, 0, 975, 0, 0, 975, 0, 0, 975, 0,
+        0, 0, 975, 0, 0, 335, 0, 640, 335, 0,
+        0, 0, 335, 640, 0, 335, 0, 640, 0, 0,
+        0, 640, 0, 335, 0, 0, 640, 335, 0, 0,
+        640, 335, 0, 0, 640, 335, 0, 975, 0, 0,
+        640, 335, 0, 0, 0, 640, 0, 0, 0, 975,
+        0, 335, 0, 0, 0, 0, 640, 335, 0, 0]
+
+    job_done = false
+    total_done = false
+    all_gold_rewards = 0
+    this_tier_time = 0
+
+    one_day_tok = cal()
+    season_ends = season_end_cal()
+    season_ends = parseInt(season_ends)
+    cur_tok = document.getElementById("current token amount").value
+    cur_tok = parseInt(cur_tok)
+    available_tokens = season_ends * one_day_tok + cur_tok
+    tier_now = document.getElementById("tier").value
+    tier_now = parseInt(tier_now)
+    if (tier_now != 70)
+    {
+        tier_now = tier_now + 1
+        tier_now_s = tier_now
+        if (have_pass)
+        {
+            while(true)
+            {
+                available_tokens -= pass_arr[tier_now]
+                if (available_tokens <= 0)
+                    break
+                chroma_credit_amount += chroma_pass_arr[tier_now]
+                all_gold_rewards += gem_gold_pass_arr[tier_now]
+                if (needed_chroma_credits <= chroma_credit_amount)
+                    break
+                tier_now += 1
+                if (tier_now > 70)
+                    break
+            }
+        }
+        else
+        {
+            while (true)
+            {
+                available_tokens -= pass_arr[tier_now]
+                if (available_tokens <= 0)
+                    break
+                chroma_credit_amount += chroma_pass_arr[tier_now]
+                all_gold_rewards += gold_pass_arr[tier_now]
+                if (needed_chroma_credits <= chroma_credit_amount)
+                    break
+                tier_now += 1
+                if (tier_now > 70)
+                    break
+            }
+        }
+        if(needed_chroma_credits <= chroma_credit_amount)
+        {
+            the_sweet_tier = [tier_now, 1]
+            k = tier_now_s
+            needed_tier_tokens = 0
+            while (k <= tier_now)
+            {
+                needed_tier_tokens += pass_arr[k]
+                k += 1
+            }
+            time = (needed_tier_tokens - cur_tok) / one_day_tok
+            time_r = Math.ceil(time)
+
+            days_needed = time_r
+            less_gold = -1
+            more_gold = Math.floor(all_gold_rewards)
+
+            job_done = true
+        }
+    }
+    if (available_tokens <= 0)
+    {
+        tier = 0
+        if(needed_chroma_credits==1500)
+            needed_chroma_credits = 500
+        if(needed_chroma_credits==4500)
+            needed_chroma_credits = 1500
+        if(have_pass_2)
+        {
+            while(true)
+            {
+                chroma_credit_amount += chroma_pass_arr[tier]
+                all_gold_rewards += gem_gold_pass_arr[tier]
+                if (needed_chroma_credits <= chroma_credit_amount)
+                    break
+                tier += 1
+                if (tier > 70)
+                    break
+            }
+        }
+        else{
+            while(true)
+            {
+                chroma_credit_amount += chroma_pass_arr[tier]
+                all_gold_rewards += gold_pass_arr[tier]
+                if (needed_chroma_credits <= chroma_credit_amount)
+                    break
+                tier += 1
+                if (tier > 70)
+                    break
+            }
+        }
+        if (tier>70)
+        {
+            time = season_ends + 1 + 63
+            time_r = Math.ceil(time)
+
+            days_needed = time_r
+            
+            all_gold_rewards += 15 / 4 * (time_r - season_ends)
+            ava_tokens = 63 * one_day_tok - 34500
+            end_rewards = Math.floor(ava_tokens / 500)
+            all_gold_rewards += 229 * end_rewards
+            not_full_pp_gold_m = 84 * end_rewards
+
+            less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
+            more_gold = Math.floor(all_gold_rewards)
+        }
+        else
+        {
+            the_sweet_tier = [tier, 2]
+
+            i = 0
+            needed_tier_tokens = 0
+            while (i <= tier)
+                needed_tier_tokens += pass_arr[i]
+                i += 1
+            time = season_ends + needed_tier_tokens / one_day_tok
+            time_r = Math.ceil(time)
+
+            days_needed = time_r
+            less_gold = -1
+            more_gold = Math.floor(all_gold_rewards)
+        }
+    }
+    else if (job_done==false)
+    {
+        if(needed_chroma_credits==1500)
+            needed_chroma_credits = 500
+        if(needed_chroma_credits==4500)
+            needed_chroma_credits = 1500
+        
+        ori_season_ends = season_ends
+        season_ends = Math.floor(available_tokens / one_day_tok)
+        this_tier_time = ori_season_ends - season_ends
+        cur_tok = available_tokens % one_day_tok
+
+        all_gold_rewards += 15 / 4 * season_ends
+        all_gold_rewards += 229 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
+        not_full_pp_gold_m = 84 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
+            
+        tier = 0
+        if (have_pass_2)
+        {
+            while (true)
+            {
+                chroma_credit_amount += chroma_pass_arr[tier]
+                all_gold_rewards += gem_gold_pass_arr[tier]
+                if (needed_chroma_credits <= chroma_credit_amount)
+                    break
+                tier += 1
+                if (tier > 70)
+                    break
+            }
+        }
+        else
+        {
+            while (true)
+            {
+                chroma_credit_amount += chroma_pass_arr[tier]
+                all_gold_rewards += gold_pass_arr[tier]
+                if (needed_chroma_credits <= chroma_credit_amount)
+                    break
+                tier += 1
+                if (tier > 70)
+                    break
+            }
+        }
+        if (tier > 70)
+        {
+            time = ori_season_ends + 1 + 63
+            time_r = Math.ceil(time)
+
+            days_needed = time_r
+
+            all_gold_rewards += 15 / 4 * (time_r - ori_season_ends)
+            ava_tokens = 63 * one_day_tok - 34500
+            end_rewards = Math.floor(ava_tokens / 500)
+            all_gold_rewards += 229 * end_rewards
+            not_full_pp_gold_m = 84 * end_rewards
+
+            less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
+            more_gold = Math.floor(all_gold_rewards)
+        }
+        else
+        {
+            the_sweet_tier = [tier, 2]
+
+            i = 0
+            needed_tier_tokens = 0
+            while (i <= tier)
+            {
+                needed_tier_tokens += pass_arr[i]
+                i += 1
+            }
+            time = ori_season_ends + needed_tier_tokens / one_day_tok
+            time_r = Math.ceil(time)
+
+            days_needed = time_r
+            less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
+            more_gold = Math.floor(all_gold_rewards)
+        }
+    }
+    if(daily_ava && days_needed>0)
+        days_needed-=1
+    hours = document.getElementById("hours left").value
+    hours = parseInt(hours)
+    if(hours<12 && days_needed>0)
+        days_needed-=1
+
+
+    var the_brawler_name = document.getElementById("brawler name storage").className
+    if (the_brawler_name == '')
+        the_brawler_name = "the brawler"
+    document.getElementById("the good shit").innerHTML = ""
+    document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("tracker").innerHTML += `Chromatic > Questions > Results`
+    make_result_place()
+    var the_result = document.getElementById("the result");
+    the_result.innerHTML += "Results:<br>"
+        
+    try
+    {
+        if(the_sweet_tier[1]=='1')
+            the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} this season.<br>`
+        else
+            the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} next season.<br>`
+    }catch(ReferenceError){}
+        
+        
+    the_result.innerHTML += `It'll take around ${days_needed} days to get ${the_brawler_name}.<br>`
+    the_result.innerHTML += `(which is around ${make_date(days_needed)})<br><br>`
+    
+    if(less_gold < 0)
+        the_result.innerHTML += `You'll get around ${more_gold} coins.`
+    else
+    {
+        the_result.innerHTML += `You'll get around ${less_gold} ~ ${more_gold} coins.`
+        the_result.innerHTML += `<br>`
+        the_result.innerHTML += `This includes coins on the pass and end of pass rewards.<br>Doesn't include power points on the pass converted to coins.<br>`
+        the_result.innerHTML += `(Min: Unlocked all end of pass rewards without a full power point bank. Max: Vice Versa)`
+    }
+    make_end_place(3)
 
 }
