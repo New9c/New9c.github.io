@@ -439,10 +439,10 @@ function check() {
     return false
 }
 
-function cal() {
+function cal(hve_pass) {
     var day = 400 + 200 + 10*3 + 8*5 + 60/4
     var weekend_events = 50 + 500
-    if (have_pass) {week_seasonal = 250 * 5 + 500 * 3} 
+    if (hve_pass) {week_seasonal = 250 * 5 + 500 * 3} 
     else {week_seasonal = 250 * 4 + 500 * 2}
     var one_week_tok = day * 7 + week_seasonal + weekend_events
     var one_day_tok = one_week_tok / 7
@@ -475,7 +475,7 @@ function solve_brawler(type) {
     var credit_amount = document.getElementById("credit amount").value;
     var needed_credits = needed_credit_amount - credit_amount
     if(type==2){
-        var one_day_cre = cal()/500*25
+        var one_day_cre = cal(have_pass)/500*25
         var days_needed = Math.ceil(needed_credits / one_day_cre)
         var less_gold = Math.floor(days_needed*cal()/500*145)
         var more_gold = Math.floor(days_needed*cal()/500*229)
@@ -532,7 +532,7 @@ function solve_brawler(type) {
         all_gold_rewards = 0
         this_tier_time = 0
 
-        one_day_tok = cal()
+        one_day_tok = cal(have_pass)
         season_ends = season_end_cal()
         season_ends = parseInt(season_ends)
         cur_tok = document.getElementById("current token amount").value
@@ -598,6 +598,7 @@ function solve_brawler(type) {
         }
         if (available_tokens <= 0)
         {
+            one_day_tok = cal(have_pass_2)
             tier = 0
             if(have_pass_2)
             {
@@ -627,12 +628,6 @@ function solve_brawler(type) {
             if (tier>70)
             {
                 all_needed_tokens = 34500 + Math.ceil(needed_credits / 25) * 500
-                console.log(season_ends)
-                console.log("+")
-                console.log(all_needed_tokens)
-                console.log("/")
-                console.log(one_day_tok)
-                console.log("=")
                 
                 time = season_ends + all_needed_tokens / one_day_tok
                 console.log(time)
@@ -665,6 +660,7 @@ function solve_brawler(type) {
         }
         else if (job_done==false)
         {
+            one_day_tok = cal(have_pass_2)
             ori_season_ends = season_ends
             season_ends = Math.floor(available_tokens / one_day_tok)
             this_tier_time = ori_season_ends - season_ends
@@ -846,7 +842,7 @@ function solve_chroma() {
     all_gold_rewards = 0
     this_tier_time = 0
 
-    one_day_tok = cal()
+    one_day_tok = cal(have_pass)
     season_ends = season_end_cal()
     season_ends = parseInt(season_ends)
     cur_tok = document.getElementById("current token amount").value
@@ -912,6 +908,7 @@ function solve_chroma() {
     }
     if (available_tokens <= 0)
     {
+        one_day_tok = cal(have_pass_2)
         tier = 0
         if(needed_chroma_credits==1500)
             needed_chroma_credits = 500
@@ -981,6 +978,8 @@ function solve_chroma() {
             needed_chroma_credits = 500
         if(needed_chroma_credits==4500)
             needed_chroma_credits = 1500
+        
+        one_day_tok = cal(have_pass_2)
         
         ori_season_ends = season_ends
         season_ends = Math.floor(available_tokens / one_day_tok)
