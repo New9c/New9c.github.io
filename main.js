@@ -530,6 +530,7 @@ function solve_brawler(type) {
         job_done = false
         total_done = false
         all_gold_rewards = 0
+        not_full_pp_gold_m = 0
         this_tier_time = 0
 
         one_day_tok = cal(have_pass)
@@ -636,7 +637,7 @@ function solve_brawler(type) {
                 days_needed = time_r
 
                 all_gold_rewards += 229 * Math.ceil(needed_credits / 25)
-                not_full_pp_gold_m = 84 * Math.ceil(needed_credits / 25)
+                not_full_pp_gold_m += 84 * Math.ceil(needed_credits / 25)
 
                 less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
                 more_gold = Math.floor(all_gold_rewards)
@@ -672,7 +673,7 @@ function solve_brawler(type) {
                 needed_credits_2 = needed_credits - Math.floor((one_day_tok * season_ends + cur_tok) / 500) * 25
                 all_gold_rewards += 15 / 4 * season_ends
                 all_gold_rewards += 229 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
-                not_full_pp_gold_m = 84 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
+                not_full_pp_gold_m += 84 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
 
                 tier = 0
                 if (have_pass_2)
@@ -740,7 +741,7 @@ function solve_brawler(type) {
                 days_needed = time_r + this_tier_time
 
                 all_gold_rewards += 229 * Math.ceil(needed_credits / 25)
-                not_full_pp_gold_m = 84 * Math.ceil(needed_credits / 25)
+                not_full_pp_gold_m += 84 * Math.ceil(needed_credits / 25)
 
                 less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
                 more_gold = Math.floor(all_gold_rewards)
@@ -840,6 +841,7 @@ function solve_chroma() {
     job_done = false
     total_done = false
     all_gold_rewards = 0
+    not_full_pp_gold_m = 0
     this_tier_time = 0
 
     one_day_tok = cal(have_pass)
@@ -950,7 +952,7 @@ function solve_chroma() {
             ava_tokens = 63 * one_day_tok - 34500
             end_rewards = Math.floor(ava_tokens / 500)
             all_gold_rewards += 229 * end_rewards
-            not_full_pp_gold_m = 84 * end_rewards
+            not_full_pp_gold_m += 84 * end_rewards
 
             less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
             more_gold = Math.floor(all_gold_rewards)
@@ -988,7 +990,7 @@ function solve_chroma() {
 
         all_gold_rewards += 15 / 4 * season_ends
         all_gold_rewards += 229 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
-        not_full_pp_gold_m = 84 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
+        not_full_pp_gold_m += 84 * Math.floor((one_day_tok * season_ends + cur_tok) / 500)
             
         tier = 0
         if (have_pass_2)
@@ -1028,7 +1030,7 @@ function solve_chroma() {
             ava_tokens = 63 * one_day_tok - 34500
             end_rewards = Math.floor(ava_tokens / 500)
             all_gold_rewards += 229 * end_rewards
-            not_full_pp_gold_m = 84 * end_rewards
+            not_full_pp_gold_m += 84 * end_rewards
 
             less_gold = Math.floor(all_gold_rewards - not_full_pp_gold_m)
             more_gold = Math.floor(all_gold_rewards)
