@@ -787,6 +787,9 @@ function solve_brawler(type) {
         the_result.innerHTML += `This includes coins on the pass and end of pass rewards.<br>Doesn't include power points on the pass converted to coins.<br>`
         the_result.innerHTML += `(Min: Unlocked all end of pass rewards without a full power point bank. Max: Vice Versa)`
     }
+
+    if (the_result.innerHTML.includes("NaN")) 
+        the_result.innerHTML += `<br><br>NaN means 'Not a Number', so you probably typed something wrong (･_･). Except for the brawler's name, everything else should be whole numbers only.`
     make_end_place(type)
 
 }
@@ -1094,6 +1097,10 @@ function solve_chroma() {
         the_result.innerHTML += `This includes coins on the pass and end of pass rewards.<br>Doesn't include power points on the pass converted to coins.<br>`
         the_result.innerHTML += `(Min: Unlocked all end of pass rewards without a full power point bank. Max: Vice Versa)`
     }
+
+    if (the_result.innerHTML.includes("NaN")) 
+        the_result.innerHTML += `<br><br>NaN means 'Not a Number', so you probably typed something wrong (･_･). Except for the brawler's name, everything else should be whole numbers only.`
+    
     make_end_place(3)
 
 }
