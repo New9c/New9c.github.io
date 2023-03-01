@@ -1,5 +1,6 @@
 function start_everything(){
     document.getElementById("disclaimer").innerHTML = ""
+    document.getElementById("the good shit").innerHTML = ""
     document.getElementById("the good shit").innerHTML += "<div class='content starting_questions' id='starting_question'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("starting_question").innerHTML += "<label for='starting question'>Choose a version (Fast = less questions & less accurate)</label><br><br>"
@@ -18,6 +19,7 @@ function make_brawler_question(type_sf){
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `${things[0]} > Rarity`
+    document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='start_everything()'>`
     document.getElementById("the good shit").innerHTML += "<div class='content rarity question' id='rarity question'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("rarity question").innerHTML += "<label for='starting questions'>What's your brawler's name? (Optional, clicking on the rarity brings you to the next page)</label><br>"
@@ -28,11 +30,11 @@ function make_brawler_question(type_sf){
     document.getElementById("rarity question").innerHTML += `<input class='epic button' type='button' value='Epic' id='epic' onclick='make_brawler_${things[1]}_questions(925)'> `
     document.getElementById("rarity question").innerHTML += `<input class='mythic button' type='button' value='Mythic' id='mythic' onclick='make_brawler_${things[1]}_questions(1900)'> `
     document.getElementById("rarity question").innerHTML += `<input class='legendary button' type='button' value='Legendary' id='legendary' onclick='make_brawler_${things[1]}_questions(3800)'> `
-    document.getElementById("rarity question").innerHTML += `<input class='chromatic button' type='button' value='Chromatic' id='chromatic' onclick='chromatic()'> `
+    document.getElementById("rarity question").innerHTML += `<input class='chromatic button' type='button' value='Chromatic' id='chromatic' onclick='chromatic(${type_sf})'> `
     document.getElementById("rarity question").innerHTML += `<input class="starting button" type="button" value="Starting Brawler" id="starting" onclick="starting('${things[0]}')">`
 }
 
-function chromatic(){
+function chromatic(go_back_place){
     var the_brawler_name = document.getElementById("brawler name storage").className
     if (the_brawler_name == '')
         the_brawler_name = "the brawler"
@@ -42,14 +44,17 @@ function chromatic(){
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `Chromatic > Questions`
+    document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='make_brawler_question(${go_back_place})'>`
     document.getElementById("the good shit").innerHTML += "<div class='content result' id='chroma questions'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("chroma questions").innerHTML += "(There's actually no fast version for this, so you'll get here either way)<br><br>"
     document.getElementById("chroma questions").innerHTML += "<input class='restart button disabled' type='button' value='Restart' id='restart button' onclick='restart()'><br><br>"
     document.getElementById("chroma questions").innerHTML += `<label for='chroma amount'> Chroma Credits amount:</label><br>`
     document.getElementById("chroma questions").innerHTML += "<input type='text' id='chroma amount' oninput='restart_ready()'> chroma credits<br><br>"
-    document.getElementById("chroma questions").innerHTML += `<label for='chroma amount'> Needed amount (bottom left number of ${the_brawler_name} right now:500, 1500, 4500):</label><br>`
-    document.getElementById("chroma questions").innerHTML += "<input type='text' id='needed chroma amount' oninput='restart_ready()'> chroma credits<br><br>"
+    document.getElementById("chroma questions").innerHTML += `<label for='chroma amount'> Needed amount (bottom left number of ${the_brawler_name} right now):</label><br>`
+    document.getElementById("chroma questions").innerHTML += "<input class='chro_500 button' type='button' value='500 credits' id='chro_500' onclick='chro_500()'> "
+    document.getElementById("chroma questions").innerHTML += "<input class='chro_1500 button' type='button' value='1500 credits' id='chro_1500' onclick='chro_1500()'> "
+    document.getElementById("chroma questions").innerHTML += "<input class='chro_4500 button' type='button' value='4500 credits' id='chro_4500' onclick='chro_4500()'><br><br>"
     document.getElementById("chroma questions").innerHTML += "<label for='current token amount'>Current token amount (left bottom corner): </label><br>"
     document.getElementById("chroma questions").innerHTML += "<input type='text' id='current token amount' oninput='restart_ready()'> tokens<br><br>"
     document.getElementById("chroma questions").innerHTML += "<label for='tier'>Which tier are you at? (Use 69+ if higher than 69)</label>"
@@ -68,7 +73,7 @@ function chromatic(){
     document.getElementById("chroma questions").innerHTML += "<label for='have pass'>Will you have the brawl pass right away next season? </label><br>"
     document.getElementById("chroma questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='yes 4 pass 2' onclick='yes_4_pass_2()'> "
     document.getElementById("chroma questions").innerHTML += "<input class='no button' type='button' value='No' id='no 4 pass 2' onclick='no_4_pass_2()'><br><br>"
-    document.getElementById("chroma questions").innerHTML += "<input class='done button'  type='button' value='Done' id='done button' onclick='solve_chroma()'>"
+    document.getElementById("chroma questions").innerHTML += `<input class='done button'  type='button' value='Done' id='done button' onclick='solve_chroma(${go_back_place})'>`
 }
 
 function brawler_name(){
@@ -82,6 +87,10 @@ function starting(text_4_tracker){
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `${text_4_tracker} > Starting Brawler (Result)`
+    if(text_4_tracker == "Standard")
+        document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='make_brawler_question(1)'>`
+    if(text_4_tracker == "Fast")
+        document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='make_brawler_question(2)'>`
     document.getElementById("the good shit").innerHTML += "<div class='content result' id='result'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("result").innerHTML += "For new players:<br>"
@@ -102,6 +111,7 @@ function make_brawler_standard_questions(credits_needed) {
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `Standard > ${the_rarity} > Questions`
+    document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='make_brawler_question(1)'>`
     document.getElementById("the good shit").innerHTML += "<div class='content question' id='brawler standard questions'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("brawler standard questions").innerHTML += "<input class='restart button disabled' type='button' value='Restart' id='restart button' onclick='restart()'><br><br>"
@@ -146,11 +156,12 @@ function make_brawler_fast_questions(credits_needed) {
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `Fast > ${the_rarity} > Questions`
+    document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='make_brawler_question(2)'>`
     document.getElementById("the good shit").innerHTML += "<div class='content question' id='brawler fast questions'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("brawler fast questions").innerHTML += "<input class='restart button disabled' type='button' value='Restart' id='restart button' onclick='restart()'><br><br>"
     document.getElementById("brawler fast questions").innerHTML += `<label for='credit amount'>Credit amount(bottom left of ${the_brawler_name}'s face):</label><br>`
-    document.getElementById("brawler fast questions").innerHTML += "<input type='text' id='credit amount' oninput='restart_ready()'><br><br>"
+    document.getElementById("brawler fast questions").innerHTML += "<input type='text' id='credit amount' oninput='restart_ready()'> credits<br><br>"
     needed_credit_amount = credits_needed;
     document.getElementById("brawler fast questions").innerHTML += "<label for='have pass'>Do you have the brawl pass this season? </label><br>"
     document.getElementById("brawler fast questions").innerHTML += "<input class='yes button' type='button' value='Yes' id='yes 4 pass' onclick='yes_4_pass()'> "
@@ -171,6 +182,21 @@ function make_the_rarity(input){
         var the_rarity = "Legendary"
     return the_rarity
 }
+
+function uno_rarity(input){
+    if(input=="Rare")
+        var num = 160
+    if(input=="Super Rare")
+        var num = 430
+    if(input=="Epic")
+        var num = 925
+    if(input=="Mythic")
+        var num = 1900
+    if(input=="Legendary")
+        var num = 3800
+    return num
+}
+
 function make_result_place() {
     document.getElementById("the good shit").innerHTML += "<div class='content result' id='the result'> "
     document.getElementById("the good shit").innerHTML += "</div>"
@@ -182,23 +208,21 @@ function make_end_place(ottf) {
     document.getElementById("endnote").innerHTML += "Thanks for using my website!<br>"
     if(ottf==1){
         document.getElementById("endnote").innerHTML += "Please note that this doesn't count a lot of ways you can make more progress, such as Club League, Challeges and Masteries.<br>Click on the button below for more info.<br>"
-        document.getElementById("endnote").innerHTML += "If you want to start over, simply reload the page.<br>"
         document.getElementById("endnote").innerHTML += "Bye! :D<br>"
         document.getElementById("endnote").innerHTML += `<input class="assumptions button" type="button" value="Assumptions & The Unpredictable" id="assumptions" onclick="assumptions(1)"></input>`
     }
         
     else if (ottf==2){
         document.getElementById("endnote").innerHTML += "Please note that the fast version gives a very rough prediction, and its results should be taken with a MOUNTAIN of salt.<br>Click on the button below for more info.<br>"
-        document.getElementById("endnote").innerHTML += "If you want to start over, simply reload the page.<br>"
         document.getElementById("endnote").innerHTML += "Bye! :D<br>"
         document.getElementById("endnote").innerHTML += `<input class="assumptions button" type="button" value="Assumptions & The Unpredictable" id="assumptions" onclick="assumptions(2)"></input>`
     }
     else{
         document.getElementById("endnote").innerHTML += "Note that this doesn't count a few ways you can get more progress, such as getting a Jackpot.<br>Click on the button below for more info.<br>"
-        document.getElementById("endnote").innerHTML += "If you want to start over, simply reload the page.<br>"
         document.getElementById("endnote").innerHTML += "Bye! :D<br>"
         document.getElementById("endnote").innerHTML += `<input class="assumptions button" type="button" value="Assumptions & The Unpredictable" id="assumptions" onclick="assumptions(3)"></input>`
     }
+    document.getElementById("endnote").innerHTML += ` <input class="again button" type="button" value="Back 2 start" id="back 2 start" onclick="start_everything()"></input>`
 }
 
 function assumptions(ottf) {
@@ -326,6 +350,48 @@ function daily_no() {
     daily_ava = false
 }
 
+function chro_500() {
+    document.getElementById("restart button").className = "restart button"
+    var clicked = document.getElementById("chro_500");
+    clicked.className = "chro_500 button clicked"
+    var not_clicked = document.getElementById("chro_1500");
+    not_clicked.className = "chro_1500 button"
+    var wee_clicked = document.getElementById("chro_4500");
+    wee_clicked.className = "chro_4500 button"
+    needed_chroma_credits = 500
+}
+
+function chro_1500() {
+    document.getElementById("restart button").className = "restart button"
+    var clicked = document.getElementById("chro_1500");
+    clicked.className = "chro_1500 button clicked"
+    var not_clicked = document.getElementById("chro_500");
+    not_clicked.className = "chro_500 button"
+    var not_clicked = document.getElementById("chro_4500");
+    not_clicked.className = "chro_4500 button"
+    needed_chroma_credits = 1500
+}
+
+function chro_4500() {
+    document.getElementById("restart button").className = "restart button"
+    var clicked = document.getElementById("chro_4500");
+    clicked.className = "chro_4500 button clicked"
+    var not_clicked = document.getElementById("chro_500");
+    not_clicked.className = "chro_500 button"
+    var wee_clicked = document.getElementById("chro_1500");
+    wee_clicked.className = "chro_1500 button"
+    needed_chroma_credits = 4500
+}
+
+function how_many_chroma(){
+    if (document.getElementById("chro_500").className == "chro_500 button clicked")
+        return 500
+    if (document.getElementById("chro_1500").className == "chro_1500 button clicked")
+        return 1500
+    if (document.getElementById("chro_4500").className == "chro_4500 button clicked")
+        return 4500
+}
+
 function restart_ready() {
     document.getElementById("restart button").className = "restart button"
 }
@@ -351,7 +417,15 @@ function restart() {
     }catch(TypeError){}
 
     try{
-        document.getElementById("needed chroma amount").value = ""
+        document.getElementById("chro_500").className = "chro_500 button"
+    }catch(TypeError){}
+
+    try{
+        document.getElementById("chro_1500").className = "chro_1500 button"
+    }catch(TypeError){}
+
+    try{
+        document.getElementById("chro_4500").className = "chro_4500 button"
     }catch(TypeError){}
 
     try{
@@ -411,7 +485,7 @@ function check() {
     }catch(TypeError){}
 
     try{
-        if(document.getElementById("needed chroma amount").value == "")
+        if(document.getElementById("chro_500").className == "chro_500 button" && document.getElementById("chro_1500").className == "chro_1500 button" && document.getElementById("chro_4500").className == "chro_4500 button")
             return true
     }catch(TypeError){}
 
@@ -474,6 +548,7 @@ function solve_brawler(type) {
     }
     var credit_amount = document.getElementById("credit amount").value;
     var needed_credits = needed_credit_amount - credit_amount
+    the_sweet_tier = [-1, -1]
     if(type==2){
         var one_day_cre = cal(have_pass)/500*25
         var days_needed = Math.ceil(needed_credits / one_day_cre)
@@ -759,9 +834,15 @@ function solve_brawler(type) {
     if (the_brawler_name == '')
         the_brawler_name = "the brawler"
     document.getElementById("the good shit").innerHTML = ""
+    document.getElementById("the good shit").innerHTML += `<div class='${the_brawler_name}' id='brawler name storage'>`
+    document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `${tracke} > ${the_rarity} > Questions > Results`
+    if(type==1)
+        document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='make_brawler_standard_questions(${uno_rarity(the_rarity)})'>`
+    if(type==2)
+        document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='make_brawler_fast_questions(${uno_rarity(the_rarity)})'>`
     make_result_place()
     var the_result = document.getElementById("the result");
     the_result.innerHTML += "Results:<br>"
@@ -770,7 +851,7 @@ function solve_brawler(type) {
     {
         if(the_sweet_tier[1]=='1')
             the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} this season.<br>`
-        else
+        else if (the_sweet_tier[1] != -1)
             the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} next season.<br>`
     }catch(ReferenceError){}
     
@@ -794,7 +875,7 @@ function solve_brawler(type) {
 
 }
 
-function solve_chroma() {
+function solve_chroma(go_back_place) {
     if(check())
     {
         alert("You haven't answered all questions!")
@@ -802,8 +883,8 @@ function solve_chroma() {
     }
     var chroma_credit_amount = document.getElementById("chroma amount").value;
     chroma_credit_amount = parseInt(chroma_credit_amount)
-    var needed_chroma_credits = document.getElementById("needed chroma amount").value
-    needed_chroma_credits = parseInt(needed_chroma_credits)
+    needed_chroma_credits = how_many_chroma()
+    the_sweet_tier = [-1, -1]
 
     var pass_arr = [0,
         75, 75, 100, 150, 200, 300, 400, 400, 400, 400,
@@ -1069,9 +1150,12 @@ function solve_chroma() {
     if (the_brawler_name == '')
         the_brawler_name = "the brawler"
     document.getElementById("the good shit").innerHTML = ""
+    document.getElementById("the good shit").innerHTML += `<div class='${the_brawler_name}' id='brawler name storage'>`
+    document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
     document.getElementById("tracker").innerHTML += `Chromatic > Questions > Results`
+    document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='chromatic(${go_back_place})'>`
     make_result_place()
     var the_result = document.getElementById("the result");
     the_result.innerHTML += "Results:<br>"
@@ -1080,7 +1164,7 @@ function solve_chroma() {
     {
         if(the_sweet_tier[1]=='1')
             the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} this season.<br>`
-        else
+        else if (the_sweet_tier[1]!=-1)
             the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} next season.<br>`
     }catch(ReferenceError){}
         

@@ -115,6 +115,22 @@ html {
     background-color: rgb(255, 47, 47);
 }
 
+.back{
+    background-color: rgb(47, 147, 255);
+}
+
+.chro_500{
+    background: linear-gradient(45deg, rgb(234, 45, 255),rgb(255, 47, 47), rgb(255, 140, 0), rgb(255, 238, 0));
+}
+
+.chro_1500{
+    background: linear-gradient(45deg, rgb(234, 45, 255),rgb(255, 47, 47), rgb(255, 140, 0), rgb(255, 238, 0));
+}
+
+.chro_4500{
+    background: linear-gradient(45deg, rgb(234, 45, 255),rgb(255, 47, 47), rgb(255, 140, 0), rgb(255, 238, 0));
+}
+
 .done{
     background: linear-gradient(45deg,rgb(55, 255, 45), rgb(255, 255, 45));
 }
