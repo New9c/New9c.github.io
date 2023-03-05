@@ -341,7 +341,7 @@ function tier_result(){
     if(sprays != 0)
         document.getElementById("tier to tier").innerHTML += `${sprays} sprays<br> `
     if(pins != 0)
-        document.getElementById("tier to tier").innerHTML += `${pins} pins for new brawler<br> `
+        document.getElementById("tier to tier").innerHTML += `${pins} pins for the new brawler<br> `
     if(pin_packs != 0)
         document.getElementById("tier to tier").innerHTML += `${pin_packs} pin packs<br> `
     if(gems != 0)
