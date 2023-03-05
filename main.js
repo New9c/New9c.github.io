@@ -15,7 +15,7 @@ function the_calculator(){
     document.getElementById("the good shit").innerHTML = ""
     document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
     document.getElementById("the good shit").innerHTML += "</div>"
-    document.getElementById("tracker").innerHTML += `Brawl Calculator (result will emerge instantly once all necessary input are in!)`
+    document.getElementById("tracker").innerHTML += `Brawl Calculator (result will emerge instantly once all necessary inputs are in!)`
     document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='start_everything()'>`
     document.getElementById("the good shit").innerHTML += "<div class='content cal question' id='cal questions'>"
     document.getElementById("the good shit").innerHTML += "</div>"
