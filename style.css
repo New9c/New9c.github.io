@@ -1,5 +1,5 @@
 html {
-    background-image: url("background.jpg");
+    background-image: url("background_2.png");
     background-color: rgb(29, 47, 244);
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -178,9 +178,15 @@ html {
     background-color: rgb(47, 147, 255);
 }
 
-
+.without{
+    background-color: rgb(255, 230, 0);
+}
 .fast{
     background-color: rgb(255, 255, 0);
+}
+
+.calculator{
+    background-color: rgb(255, 170, 0);
 }
 
 .rare{

@@ -3,9 +3,357 @@ function start_everything(){
     document.getElementById("the good shit").innerHTML = ""
     document.getElementById("the good shit").innerHTML += "<div class='content starting_questions' id='starting_question'>"
     document.getElementById("the good shit").innerHTML += "</div>"
-    document.getElementById("starting_question").innerHTML += "<label for='starting question'>Choose a version (Fast = less questions & less accurate)</label><br><br>"
+    document.getElementById("starting_question").innerHTML += "What do you wanna use?<br><br>"
+    document.getElementById("starting_question").innerHTML += "<label for='starting question'>Brawler Predictors (Fast = less questions & less accurate)</label><br><br>"
     document.getElementById("starting_question").innerHTML += `<input class="standard button" type="button" value="Standard Version" id="standard" onclick="make_brawler_question(1)"><br>`
-    document.getElementById("starting_question").innerHTML += `<input class="fast button" type="button" value="Fast Version" id="fast" onclick="make_brawler_question(2)"><br>`
+    document.getElementById("starting_question").innerHTML += `<input class="fast button" type="button" value="Fast Version" id="fast" onclick="make_brawler_question(2)"><br><br>`
+    document.getElementById("starting_question").innerHTML += "<label for='starting question'>Brawl Calculator </label><br><br>"
+    document.getElementById("starting_question").innerHTML += `<input class="calculator button" type="button" value="Brawl Calculator" id="cal" onclick="the_calculator()"><br>`
+}
+
+function the_calculator(){
+    document.getElementById("the good shit").innerHTML = ""
+    document.getElementById("the good shit").innerHTML += "<div class='content text question' id='tracker'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
+    document.getElementById("tracker").innerHTML += `Brawl Calculator`
+    document.getElementById("tracker").innerHTML += `<br><input class='back button' type='button' value='Back' id='back' onclick='start_everything()'>`
+    document.getElementById("the good shit").innerHTML += "<div class='content cal question' id='cal questions'>"
+    document.getElementById("the good shit").innerHTML += "</div>"
+
+    document.getElementById("cal questions").innerHTML += "(Click on the buttons to toggle between 'with' or 'without', and click 'back' above from here to go back to the main page :D)<br><br>"
+    
+    document.getElementById("cal questions").innerHTML += "<input class='without pass button' type='button' value='Without a brawl pass' id='da ya pass' onclick='pass_button()'>,<br>"
+    document.getElementById("cal questions").innerHTML += "from tier <input type='text' id='sta tier' oninput='tier_result()'>"
+    document.getElementById("cal questions").innerHTML += " to tier <input type='text' id='end tier' oninput='tier_result()'>"
+    document.getElementById("cal questions").innerHTML += " you'll get (tier 0 = free gift at the start): <br>"
+    document.getElementById("cal questions").innerHTML += "<div class='tier to tier' id='tier to tier'>"
+    document.getElementById("cal questions").innerHTML += "</div><br>"
+    document.getElementById("tier to tier").innerHTML = "? resources"
+
+    
+    document.getElementById("cal questions").innerHTML += "<input class='without bank button' type='button' value='Without a full power point bank' id='da ya bank' onclick='bun_button()'>,<br>"
+    document.getElementById("cal questions").innerHTML += "<input type='text' id='bundles' oninput='bun_result_s()'> end reward bundles "
+    document.getElementById("cal questions").innerHTML += ` will give you:<br>`
+    document.getElementById("cal questions").innerHTML += "<div class='bun result_s' id='bun result_s'>"
+    document.getElementById("cal questions").innerHTML += "</div><br>"
+    document.getElementById("bun result_s").innerHTML = "? resources"
+
+    document.getElementById("cal questions").innerHTML += "To get a brawler from <br>power <input type='text' id='sta power' oninput='cost_result()'>"
+    document.getElementById("cal questions").innerHTML += " -> power <input type='text' id='end power' oninput='cost_result()'><br>"
+    document.getElementById("cal questions").innerHTML += "+ <input type='text' id='gad amount' oninput='cost_result()'> gadgets<br>"
+    document.getElementById("cal questions").innerHTML += "+ <input type='text' id='star amount' oninput='cost_result()'> star powers<br>"
+    document.getElementById("cal questions").innerHTML += "+ <input type='text' id='rare gear' oninput='cost_result()'> super rare gears<br>"
+    document.getElementById("cal questions").innerHTML += "+ <input type='text' id='epic gear' oninput='cost_result()'> epic gears<br>"
+    document.getElementById("cal questions").innerHTML += "+ <input type='text' id='mythic gear' oninput='cost_result()'> mythic gears<br>"
+    document.getElementById("cal questions").innerHTML += "<div class='cost' id='cost'>"
+    document.getElementById("cal questions").innerHTML += "</div><br>"
+    document.getElementById("cost").innerHTML = "You'll need ? resources"
+
+    document.getElementById("cal questions").innerHTML += "<input type='text' id='ppz' oninput='p_to_coiz()'> power points<br>"
+    document.getElementById("cal questions").innerHTML += "<div class='p_to_coiz' id='p_to_coiz'>"
+    document.getElementById("cal questions").innerHTML += "</div><br>"
+    document.getElementById("p_to_coiz").innerHTML = "= ? coins"
+
+    document.getElementById("cal questions").innerHTML += "60 * <input type='text' id='cp' oninput='c_to_p()'> club coins<br>"
+    document.getElementById("cal questions").innerHTML += "<div class='c_to_p' id='c_to_p'>"
+    document.getElementById("cal questions").innerHTML += "</div><br>"
+    document.getElementById("c_to_p").innerHTML = "= ? power points"
+
+    document.getElementById("cal questions").innerHTML += "100 * <input type='text' id='cc' oninput='c_to_coiz()'> club coins<br>"
+    document.getElementById("cal questions").innerHTML += "<div class='c_to_coiz' id='c_to_coiz'>"
+    document.getElementById("cal questions").innerHTML += "</div>"
+    document.getElementById("c_to_coiz").innerHTML = "= ? coins"
+}
+
+function p_to_coiz(){
+    if(document.getElementById("ppz").value == "")
+    {
+        document.getElementById("p_to_coiz").innerHTML = "= ? coins"
+        return 0;
+    }
+    ppz = parseInt(document.getElementById("ppz").value) 
+    document.getElementById("p_to_coiz").innerHTML = `= ${ppz*2} coins`
+}
+
+function c_to_p(){
+    if(document.getElementById("cp").value == "")
+    {
+        document.getElementById("c_to_p").innerHTML = "= ? power points"
+        return 0;
+    }
+    club_coins = parseInt(document.getElementById("cp").value) 
+    document.getElementById("c_to_p").innerHTML = `= ${club_coins*60} club coins<br>`
+    document.getElementById("c_to_p").innerHTML += `= ${club_coins*100} power points`
+}
+
+function c_to_coiz(){
+    if(document.getElementById("cc").value == "")
+    {
+        document.getElementById("c_to_coiz").innerHTML = "= ? coins"
+        return 0;
+    }
+    club_coins = parseInt(document.getElementById("cc").value) 
+    document.getElementById("c_to_coiz").innerHTML = `= ${club_coins*100} club coins<br>`
+    document.getElementById("c_to_coiz").innerHTML += `= ${club_coins*250} power points`
+}
+
+function bun_button(){
+    if(document.getElementById("da ya bank").value == "Without a full power point bank")
+    {
+        document.getElementById("da ya bank").value = "With a full power point bank"
+        document.getElementById("da ya bank").className = "with bank button"
+    }
+    else
+    {
+        document.getElementById("da ya bank").value = "Without a full power point bank"
+        document.getElementById("da ya bank").className = "without bank button"
+    }
+    bun_result_s()
+}
+
+function bun_result_s(){
+    if(document.getElementById("bundles").value == "")
+    {
+        document.getElementById("bun result_s").innerHTML = "? resources"
+        return 0;
+    }  
+    if(document.getElementById("da ya bank").value == "Without a full power point bank")
+    {
+        bundles = document.getElementById("bundles").value
+        bundles = parseInt(bundles)
+        document.getElementById("bun result_s").innerHTML = `${145*bundles} coins, ${42*bundles} power points and ${25*bundles} credits.`
+    }
+    else
+    {
+        bundles = document.getElementById("bundles").value
+        bundles = parseInt(bundles)
+        document.getElementById("bun result_s").innerHTML = `${229*bundles} coins and ${25*bundles} credits.`
+    }
+}
+
+function cost_result(){
+    answer = 0
+    pp_answer = 0
+    if(document.getElementById("sta power").value == "")
+    {
+        document.getElementById("cost").innerHTML = "You'll need ? resources"
+        return 0;
+    }
+    if(document.getElementById("end power").value == "")
+    {
+        document.getElementById("cost").innerHTML = "You'll need ? resources"
+        return 0;
+    }
+    if(parseInt(document.getElementById("sta power").value) > parseInt(document.getElementById("end power").value))
+    {
+        document.getElementById("cost").innerHTML = "bruh (start power > end power)"
+        return 0;
+    }
+    gold_arr = [0, 0, 20, 55, 130, 270, 560, 1040, 1840, 3090, 4965, 7765]
+    power_points_arr = [0, 0, 20, 50, 100, 180, 310, 520, 860, 1410, 2300, 3740]
+    answer += gold_arr[parseInt(document.getElementById("end power").value)] - gold_arr[parseInt(document.getElementById("sta power").value)]
+    pp_answer += power_points_arr[parseInt(document.getElementById("end power").value)] - power_points_arr[parseInt(document.getElementById("sta power").value)]
+    if(document.getElementById("gad amount").value != "")
+        answer += parseInt(document.getElementById("gad amount").value)*1000
+    if(document.getElementById("star amount").value != "")
+        answer += parseInt(document.getElementById("star amount").value)*2000
+    if(document.getElementById("rare gear").value != "")
+        answer += parseInt(document.getElementById("rare gear").value)*1000
+    if(document.getElementById("epic gear").value != "")
+        answer += parseInt(document.getElementById("epic gear").value)*1500
+    if(document.getElementById("mythic gear").value != "")
+        answer += parseInt(document.getElementById("mythic gear").value)*2000
+    if(pp_answer == 0)
+        document.getElementById("cost").innerHTML = `You'll need ${answer} coins.`
+    else
+        document.getElementById("cost").innerHTML = `You'll need ${answer} coins and ${pp_answer} power points (at least ${Math.ceil(pp_answer/100)*60} club coins).`
+}
+
+function pass_button(){
+    if(document.getElementById("da ya pass").value == "Without a brawl pass")
+    {
+        document.getElementById("da ya pass").value = "With a brawl pass"
+        document.getElementById("da ya pass").className = "with pass button"
+    }
+    else
+    {
+        document.getElementById("da ya pass").value = "Without a brawl pass"
+        document.getElementById("da ya pass").className = "without pass button"
+    }
+    tier_result()
+}
+
+function tier_result(){
+    if(document.getElementById("sta tier").value == "")
+    {
+        document.getElementById("tier to tier").innerHTML = "? resources<br>"
+        return 0;
+    }
+    if(document.getElementById("end tier").value == "")
+    {
+        document.getElementById("tier to tier").innerHTML = "? resources<br>"
+        return 0;
+    }
+    if(parseInt(document.getElementById("sta tier").value) > parseInt(document.getElementById("end tier").value))
+    {
+        document.getElementById("tier to tier").innerHTML = "bruh (start tier > end tier)<br>"
+        return 0;
+    }
+    gem_arr = [0, 
+        0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 
+        10, 10, 10, 20, 20, 20, 20, 20, 20, 20, 
+        20, 40, 40, 40, 40, 40, 40, 40, 40, 40, 
+        40, 40, 40, 40, 40, 50, 50, 50, 50, 50, 
+        50, 50, 50, 60, 60, 60, 60, 60, 60, 60, 
+        60, 70, 70, 70, 70, 70, 70, 70, 70, 70, 
+        70, 90, 90, 90, 90, 90, 90, 90, 90, 90]
+    credit_pass_arr = [95,
+        95, 95, 95, 190, 190, 190, 190, 285, 285, 285, 
+        285, 380, 380, 380, 380, 475, 475, 475, 475, 570, 
+        570, 570, 570, 570, 665, 665, 665, 665, 665, 760, 
+        760, 760, 855, 855, 855, 855, 855, 950, 950, 950, 
+        950, 950, 1045, 1045, 1045, 1045, 1045, 1045, 1140, 1140, 
+        1140, 1140, 1140, 1235, 1235, 1235, 1235, 1330, 1330, 1330, 
+        1330, 1330, 1425, 1425, 1425, 1425, 1425, 1520, 1520, 1520]
+    gem_credit_pass_arr = [95, 
+        95, 140, 140, 235, 280, 280, 280, 420, 420, 420, 
+        420, 560, 560, 560, 605, 700, 700, 745, 745, 840, 
+        840, 885, 885, 885, 1025, 1025, 1025, 1070, 1070, 1165, 
+        1165, 1210, 1305, 1305, 1305, 1350, 1350, 1445, 1445, 1490, 
+        1490, 1490, 1585, 1585, 1585, 1585, 1630, 1630, 1725, 1770, 
+        1770, 1770, 1770, 1865, 1865, 1910, 1910, 2005, 2005, 2005, 
+        2005, 2005, 2100, 2145, 2145, 2145, 2145, 2240, 2240, 2240]
+    gold_pass_arr = [0, 
+        0, 0, 640, 640, 640, 1280, 1280, 1280, 1920, 1920, 
+        1920, 1920, 2560, 2560, 2560, 2560, 2560, 3200, 3200, 3200, 
+        3200, 3200, 3200, 3840, 3840, 3840, 3840, 4480, 4480, 4480, 
+        4480, 5120, 5120, 5120, 5120, 5120, 5760, 5760, 5760, 5760, 
+        6400, 6400, 6400, 6400, 7040, 7040, 7040, 7680, 7680, 7680, 
+        8320, 8320, 8320, 8320, 8320, 8960, 8960, 8960, 8960, 9600, 
+        9600, 9600, 9600, 9600, 9600, 9600, 10240, 10240, 10240, 10240]
+    gem_gold_pass_arr = [0, 
+        0, 0, 975, 975, 975, 1950, 1950, 1950, 2925, 2925, 
+        2925, 2925, 3900, 3900, 3900, 4235, 4235, 4875, 5210, 5210, 
+        5210, 5210, 5545, 6185, 6185, 6520, 6520, 7160, 7160, 7160, 
+        7160, 7800, 7800, 8135, 8135, 8135, 8775, 9110, 9110, 9110, 
+        9750, 10085, 10085, 10085, 10725, 11060, 11060, 12035, 12035, 12035, 
+        12675, 13010, 13010, 13010, 13010, 13650, 13650, 13650, 13650, 14625, 
+        14625, 14960, 14960, 14960, 14960, 14960, 15600, 15935, 15935, 15935]
+    pp_pass_arr = [0, 
+        165, 165, 165, 165, 350, 350, 350, 350, 350, 535, 
+        535, 535, 535, 535, 720, 720, 720, 720, 905, 905, 
+        905, 905, 1090, 1090, 1090, 1275, 1275, 1275, 1460, 1460, 
+        1460, 1460, 1460, 1645, 1645, 1645, 1645, 1645, 1830, 1830, 
+        1830, 2015, 2015, 2015, 2015, 2015, 2200, 2200, 2200, 2385, 
+        2385, 2385, 2570, 2570, 2570, 2570, 2755, 2755, 2755, 2755, 
+        2940, 2940, 2940, 3125, 3125, 3310, 3310, 3310, 3550, 3550]
+    gem_pp_pass_arr = [0, 
+        325, 325, 325, 485, 670, 670, 830, 830, 830, 1015, 
+        1175, 1175, 1175, 1335, 1520, 1520, 1680, 1680, 1865, 1865, 
+        2025, 2025, 2210, 2370, 2370, 2555, 2715, 2715, 3060, 3060, 
+        3060, 3060, 3060, 3245, 3245, 3245, 3245, 3245, 3590, 3590, 
+        3590, 3775, 3775, 3935, 3935, 3935, 4120, 4120, 4120, 4305, 
+        4305, 4305, 4490, 4650, 4650, 4650, 4835, 4995, 4995, 4995, 
+        5180, 5180, 5180, 5365, 5365, 5710, 5710, 5710, 5950, 5950]
+    chroma_pass_arr = [0, 
+        0, 0, 0, 0, 0, 0, 60, 60, 60, 60, 
+        100, 100, 100, 100, 100, 100, 140, 140, 140, 140, 
+        180, 180, 180, 180, 180, 180, 220, 220, 220, 220, 
+        260, 260, 260, 260, 300, 300, 300, 300, 300, 340, 
+        340, 340, 340, 340, 340, 380, 380, 380, 380, 380, 
+        380, 380, 380, 380, 420, 420, 420, 420, 460, 460, 
+        460, 460, 460, 460, 500, 500, 500, 500, 500, 500]
+    pins_arr = [0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+        1, 1, 2, 2, 3, 3, 4, 4, 4, 4, 
+        5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 
+        8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 
+        13, 13, 14, 14, 15, 15, 16, 16, 17, 17]
+
+    end_tier = parseInt(document.getElementById("end tier").value)
+    sta_tier = parseInt(document.getElementById("sta tier").value)-1
+    pin_packs = 0
+    pins = 0
+    sprays = 0
+    document.getElementById("tier to tier").innerHTML = ""
+    if(document.getElementById("da ya pass").value == "Without a brawl pass")
+    {
+        if(end_tier == 70)
+            pin_packs += 1
+        if(sta_tier < 0)
+        {
+            gems = gem_arr[end_tier]
+            gold = gold_pass_arr[end_tier]
+            pp = pp_pass_arr[end_tier]
+            credits = credit_pass_arr[end_tier]
+            chroma = chroma_pass_arr[end_tier]
+        }
+        else
+        {
+            gems = gem_arr[end_tier] - gem_arr[sta_tier]
+            gold = gold_pass_arr[end_tier] - gold_pass_arr[sta_tier]
+            pp = pp_pass_arr[end_tier] - pp_pass_arr[sta_tier]
+            credits = credit_pass_arr[end_tier] - credit_pass_arr[sta_tier]
+            chroma = chroma_pass_arr[end_tier] - chroma_pass_arr[sta_tier]
+        }
+    }
+    else
+    {
+        if(sta_tier == -1)
+            document.getElementById("tier to tier").innerHTML += `A sweet skin! (for a more common brawler) <br> `
+        if(sta_tier < 30 && end_tier >= 30)
+            document.getElementById("tier to tier").innerHTML += `NEW CHROMATIC BRAWLER! <br> `
+        
+        if(end_tier == 70)
+        {
+            document.getElementById("tier to tier").innerHTML += `A sweet skin! (for the new brawler) <br> `
+            pin_packs += 1
+        }
+            
+        if(sta_tier < 10 && end_tier >= 10)
+            pin_packs += 1
+        
+        if(sta_tier < 20 && end_tier >= 20)
+            sprays += 1
+        if(sta_tier < 43 && end_tier >= 43)
+            sprays += 1
+        if(sta_tier < 0)
+        {
+            pins = pins_arr[end_tier]
+            gems = gem_arr[end_tier]
+            gold = gem_gold_pass_arr[end_tier]
+            pp = gem_pp_pass_arr[end_tier]
+            credits = gem_credit_pass_arr[end_tier]
+            chroma = chroma_pass_arr[end_tier]
+        }
+        else
+        {
+            pins = pins_arr[end_tier] - pins_arr[sta_tier]
+            gems = gem_arr[end_tier] - gem_arr[sta_tier]
+            gold = gem_gold_pass_arr[end_tier] - gem_gold_pass_arr[sta_tier]
+            pp = gem_pp_pass_arr[end_tier] - gem_pp_pass_arr[sta_tier]
+            credits = gem_credit_pass_arr[end_tier] - gem_credit_pass_arr[sta_tier]
+            chroma = chroma_pass_arr[end_tier] - chroma_pass_arr[sta_tier]
+        }
+    }
+    if(sprays != 0)
+        document.getElementById("tier to tier").innerHTML += `${sprays} sprays<br> `
+    if(pins != 0)
+        document.getElementById("tier to tier").innerHTML += `${pins} pins for new brawler<br> `
+    if(pin_packs != 0)
+        document.getElementById("tier to tier").innerHTML += `${pin_packs} pin packs<br> `
+    if(gems != 0)
+        document.getElementById("tier to tier").innerHTML += `${gems} gems<br> `
+    if(credits != 0)
+        document.getElementById("tier to tier").innerHTML += `${credits} credits<br> `
+    if(gold != 0)
+        document.getElementById("tier to tier").innerHTML += `${gold} coins<br>`
+    if(pp != 0)
+        document.getElementById("tier to tier").innerHTML += `${pp} power points<br>`
+    if(chroma != 0)
+        document.getElementById("tier to tier").innerHTML += `${chroma} chroma credits<br>`
 }
 
 function make_brawler_question(type_sf){
@@ -230,7 +578,7 @@ function assumptions(ottf) {
     {
         document.getElementById("endnote").innerHTML = ``
         document.getElementById("endnote").innerHTML += `Assumptions:<br>`
-        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked(+map maker)<br>`
+        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked (+map maker)<br>`
         document.getElementById("endnote").innerHTML += `* Uses average of all tokens collected in a week => thinks every day of the week is the same => less reliable when it predicts you'll get the brawler in <7 days.<br>`
         document.getElementById("endnote").innerHTML += `* No mid-way brawl pass purchase (quite common for F2P)<br>`
         document.getElementById("endnote").innerHTML += `* Optimal token collecting by player<br>`
@@ -255,7 +603,7 @@ function assumptions(ottf) {
         document.getElementById("endnote").innerHTML += `* Player is always at the end of the pass => simple, consistant, not accurate (Main issue)<br>`
         document.getElementById("endnote").innerHTML += `* Player has just gotten daily quests and finished them => 1 extra day could be added<br>`
         document.getElementById("endnote").innerHTML += `<br>(The rest is the same as the standard version)<br>`
-        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked(+map maker)<br>`
+        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked (+map maker)<br>`
         document.getElementById("endnote").innerHTML += `* Uses average of all tokens collected in a week => thinks every day of the week is the same => less reliable when it predicts you'll get the brawler in <7 days.<br>`
         document.getElementById("endnote").innerHTML += `* No mid-way brawl pass purchase (quite common for F2P)<br>`
         document.getElementById("endnote").innerHTML += `* Optimal token collecting by player<br>`
@@ -277,7 +625,7 @@ function assumptions(ottf) {
     {
         document.getElementById("endnote").innerHTML = ``
         document.getElementById("endnote").innerHTML += `Assumptions:<br>`
-        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked(+map maker)<br>`
+        document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked (+map maker)<br>`
         document.getElementById("endnote").innerHTML += `* Uses average of all tokens collected in a week => thinks every day of the week is the same => less reliable when it predicts you'll get the brawler in <7 days.<br>`
         document.getElementById("endnote").innerHTML += `* Optimal token collecting by player<br>`
         document.getElementById("endnote").innerHTML += `* Believes the new season quests will be done within the same week you received them<br>`
@@ -292,6 +640,7 @@ function assumptions(ottf) {
         document.getElementById("endnote").innerHTML += `* Double token/Coin showers events<br>`
         document.getElementById("endnote").innerHTML += `* event.brawlstars.com`
     }
+    document.getElementById("endnote").innerHTML += `<br><input class="again button" type="button" value="Back 2 start" id="back 2 start" onclick="start_everything()"></input>`
 }
 
 
