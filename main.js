@@ -578,6 +578,7 @@ function assumptions(ottf) {
     {
         document.getElementById("endnote").innerHTML = ``
         document.getElementById("endnote").innerHTML += `Assumptions:<br>`
+        document.getElementById("endnote").innerHTML += `* Player is F2P<br>`
         document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked (+map maker)<br>`
         document.getElementById("endnote").innerHTML += `* Uses average of all tokens collected in a week => thinks every day of the week is the same => less reliable when it predicts you'll get the brawler in <7 days.<br>`
         document.getElementById("endnote").innerHTML += `* No mid-way brawl pass purchase (quite common for F2P)<br>`
@@ -590,7 +591,7 @@ function assumptions(ottf) {
         document.getElementById("endnote").innerHTML += `* Club League<br>`
         document.getElementById("endnote").innerHTML += `* Masteries<br>`
         document.getElementById("endnote").innerHTML += `* JACKPOT!<br>`
-        document.getElementById("endnote").innerHTML += `* Challenges / Surprise quests<br>`
+        document.getElementById("endnote").innerHTML += `* Challenges / Special quests<br>`
         document.getElementById("endnote").innerHTML += `* Trophy road rewards<br>`
         document.getElementById("endnote").innerHTML += `* Higher ranks (additional tokens)<br>`
         document.getElementById("endnote").innerHTML += `* Double token/Coin showers events<br>`
@@ -600,6 +601,7 @@ function assumptions(ottf) {
     {
         document.getElementById("endnote").innerHTML = ``
         document.getElementById("endnote").innerHTML += `Assumptions:<br>`
+        document.getElementById("endnote").innerHTML += `* Player is F2P<br>`
         document.getElementById("endnote").innerHTML += `* Player is always at the end of the pass => simple, consistant, not accurate (Main issue)<br>`
         document.getElementById("endnote").innerHTML += `* Player has just gotten daily quests and finished them => 1 extra day could be added<br>`
         document.getElementById("endnote").innerHTML += `<br>(The rest is the same as the standard version)<br>`
@@ -615,7 +617,7 @@ function assumptions(ottf) {
         document.getElementById("endnote").innerHTML += `* Club League<br>`
         document.getElementById("endnote").innerHTML += `* Masteries<br>`
         document.getElementById("endnote").innerHTML += `* JACKPOT!<br>`
-        document.getElementById("endnote").innerHTML += `* Challenges / Surprise quests<br>`
+        document.getElementById("endnote").innerHTML += `* Challenges / Special quests<br>`
         document.getElementById("endnote").innerHTML += `* Trophy road rewards<br>`
         document.getElementById("endnote").innerHTML += `* Higher ranks/experience (additional tokens)<br>`
         document.getElementById("endnote").innerHTML += `* Double token/Coin showers events<br>`
@@ -625,6 +627,7 @@ function assumptions(ottf) {
     {
         document.getElementById("endnote").innerHTML = ``
         document.getElementById("endnote").innerHTML += `Assumptions:<br>`
+        document.getElementById("endnote").innerHTML += `* Player is F2P<br>`
         document.getElementById("endnote").innerHTML += `* Player has all game modes unlocked (+map maker)<br>`
         document.getElementById("endnote").innerHTML += `* Uses average of all tokens collected in a week => thinks every day of the week is the same => less reliable when it predicts you'll get the brawler in <7 days.<br>`
         document.getElementById("endnote").innerHTML += `* Optimal token collecting by player<br>`
@@ -634,7 +637,7 @@ function assumptions(ottf) {
         document.getElementById("endnote").innerHTML += `The Unpredictable:<br>`
         document.getElementById("endnote").innerHTML += `* Masteries<br>`
         document.getElementById("endnote").innerHTML += `* JACKPOT!<br>`
-        document.getElementById("endnote").innerHTML += `* Challenges / Surprise quests<br>`
+        document.getElementById("endnote").innerHTML += `* Challenges / Special quests<br>`
         document.getElementById("endnote").innerHTML += `* Trophy road rewards<br>`
         document.getElementById("endnote").innerHTML += `* Higher ranks/experience (additional tokens)<br>`
         document.getElementById("endnote").innerHTML += `* Double token/Coin showers events<br>`
