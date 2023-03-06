@@ -54,15 +54,11 @@ function the_calculator(){
     document.getElementById("cal questions").innerHTML += "</div><br>"
     document.getElementById("p_to_coiz").innerHTML = "= ? coins"
 
-    document.getElementById("cal questions").innerHTML += "60 * <input type='text' id='cp' oninput='c_to_p()'> club coins<br>"
-    document.getElementById("cal questions").innerHTML += "<div class='c_to_p' id='c_to_p'>"
+    document.getElementById("cal questions").innerHTML += "<input type='text' id='cpc' oninput='c_to_p_or_coiz()'> club coins<br>"
+    document.getElementById("cal questions").innerHTML += "<div class='c_to_p_or_coiz' id='c_to_p_or_coiz'>"
     document.getElementById("cal questions").innerHTML += "</div><br>"
-    document.getElementById("c_to_p").innerHTML = "= ? power points"
-
-    document.getElementById("cal questions").innerHTML += "100 * <input type='text' id='cc' oninput='c_to_coiz()'> club coins<br>"
-    document.getElementById("cal questions").innerHTML += "<div class='c_to_coiz' id='c_to_coiz'>"
-    document.getElementById("cal questions").innerHTML += "</div>"
-    document.getElementById("c_to_coiz").innerHTML = "= ? coins"
+    document.getElementById("c_to_p_or_coiz").innerHTML = "= ? power points<br>"
+    document.getElementById("c_to_p_or_coiz").innerHTML += "or ? coins"
 }
 
 function p_to_coiz(){
@@ -75,15 +71,25 @@ function p_to_coiz(){
     document.getElementById("p_to_coiz").innerHTML = `= ${ppz*2} coins`
 }
 
-function c_to_p(){
-    if(document.getElementById("cp").value == "")
+function c_to_p_or_coiz(){
+    if(document.getElementById("cpc").value == "")
     {
-        document.getElementById("c_to_p").innerHTML = "= ? power points"
+        document.getElementById("c_to_p_or_coiz").innerHTML = "= ? power points<br>"
+        document.getElementById("c_to_p_or_coiz").innerHTML += "or ? coins"
         return 0;
     }
-    club_coins = parseInt(document.getElementById("cp").value) 
-    document.getElementById("c_to_p").innerHTML = `= ${club_coins*60} club coins<br>`
-    document.getElementById("c_to_p").innerHTML += `= ${club_coins*100} power points`
+    club_coins = parseInt(document.getElementById("cpc").value) 
+    document.getElementById("c_to_p_or_coiz").innerHTML = "= ? power points<br>"
+    document.getElementById("c_to_p_or_coiz").innerHTML += "or ? coins"
+    if(club_coins%60==0)
+        document.getElementById("c_to_p_or_coiz").innerHTML = `= ${Math.floor(club_coins/60)*100} power points<br>`
+    else
+        document.getElementById("c_to_p_or_coiz").innerHTML = `= ${Math.floor(club_coins/60)*100} power points + ${club_coins%60} extra club coins<br>`
+    if(club_coins%100==0)
+        document.getElementById("c_to_p_or_coiz").innerHTML += `or ${Math.floor(club_coins/100)*250} coins<br>`
+    else
+        document.getElementById("c_to_p_or_coiz").innerHTML += `or ${Math.floor(club_coins/100)*250} coins + ${club_coins%100} extra club coins<br>`
+    document.getElementById("c_to_p_or_coiz").innerHTML += `(Note that converting to power points is typically better than converting to coins)`
 }
 
 function c_to_coiz(){
