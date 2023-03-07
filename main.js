@@ -413,7 +413,7 @@ function chromatic(go_back_place){
     document.getElementById("chroma questions").innerHTML += "<input type='text' id='current token amount' oninput='restart_ready()'> tokens<br><br>"
     document.getElementById("chroma questions").innerHTML += "<label for='tier'>Which tier are you at? (Use 69+ if higher than 69)</label>"
     document.getElementById("chroma questions").innerHTML += "<p id='slider value'>35</p>"
-    document.getElementById("chroma questions").innerHTML += "<input type='range' min='0' max='70' class='tier' id='tier' oninput='put_slider_value()'><br><br>"
+    document.getElementById("chroma questions").innerHTML += "<input type='range' min='0' max='70' class='tier' id='tier' oninput='chro_put_slider_value()'><br><br>"
     document.getElementById("chroma questions").innerHTML += "<label for='days left'>How many days & hours till season ends? </label><br>"
     document.getElementById("chroma questions").innerHTML += "<input type='text' id='days left' oninput='restart_ready()'> days<br>"
     document.getElementById("chroma questions").innerHTML += "<input type='text' id='hours left' oninput='restart_ready()'> hours<br>"
@@ -493,6 +493,10 @@ function make_brawler_standard_questions(credits_needed) {
     document.getElementById("brawler standard questions").innerHTML += "<input class='done button'  type='button' value='Done' id='done button' onclick='solve_brawler(1)'>"
 }
 
+function chro_put_slider_value(){
+    chro_check()
+    put_slider_value()
+}
 function put_slider_value(){
     document.getElementById("slider value").innerHTML = document.getElementById("tier").value
     if(document.getElementById("tier").value == 70)
@@ -655,12 +659,15 @@ function assumptions(ottf) {
 
 
 function yes_4_pass() {
-    document.getElementById("restart button").className = "restart button"
-    var clicked = document.getElementById("yes 4 pass");
-    clicked.className = "yes button clicked"
-    var not_clicked = document.getElementById("no 4 pass");
-    not_clicked.className = "no button"
-    have_pass = true
+    if(document.getElementById("yes 4 pass").className == "yes button")
+    {
+        document.getElementById("restart button").className = "restart button"
+        var clicked = document.getElementById("yes 4 pass");
+        clicked.className = "yes button clicked"
+        var not_clicked = document.getElementById("no 4 pass");
+        not_clicked.className = "no button"
+        have_pass = true
+    }
 }
 
 function no_4_pass() {
@@ -668,7 +675,8 @@ function no_4_pass() {
     var clicked = document.getElementById("no 4 pass");
     clicked.className = "no button clicked"
     var not_clicked = document.getElementById("yes 4 pass");
-    not_clicked.className = "yes button"
+    if(not_clicked.className != "yes button disabled")
+        not_clicked.className = "yes button"
     have_pass = false
 }
 
@@ -717,6 +725,7 @@ function chro_500() {
     var wee_clicked = document.getElementById("chro_4500");
     wee_clicked.className = "chro_4500 button"
     needed_chroma_credits = 500
+    chro_check()
 }
 
 function chro_1500() {
@@ -728,6 +737,7 @@ function chro_1500() {
     var not_clicked = document.getElementById("chro_4500");
     not_clicked.className = "chro_4500 button"
     needed_chroma_credits = 1500
+    chro_check()
 }
 
 function chro_4500() {
@@ -739,6 +749,7 @@ function chro_4500() {
     var wee_clicked = document.getElementById("chro_1500");
     wee_clicked.className = "chro_1500 button"
     needed_chroma_credits = 4500
+    chro_check()
 }
 
 function how_many_chroma(){
@@ -825,7 +836,7 @@ function restart() {
 }
 
 function check() {
-    if(document.getElementById("yes 4 pass").className == "yes button" && document.getElementById("no 4 pass").className == "no button")
+    if(document.getElementById("yes 4 pass").className != "yes button clicked" && document.getElementById("no 4 pass").className != "no button clicked")
         return true
     try{
         if(document.getElementById("credit amount").value == "")
@@ -869,6 +880,13 @@ function check() {
 
 
     return false
+}
+
+function chro_check(){
+    if(document.getElementById("chro_4500").className == "chro_4500 button clicked" && parseInt(document.getElementById("tier").value) >= 30)
+        document.getElementById("yes 4 pass").className = "yes button disabled"
+    else
+        document.getElementById("yes 4 pass").className = "yes button"
 }
 
 function cal(hve_pass) {
@@ -1294,6 +1312,7 @@ function solve_chroma(go_back_place) {
     available_tokens = season_ends * one_day_tok + cur_tok
     tier_now = document.getElementById("tier").value
     tier_now = parseInt(tier_now)
+    via_pass = false
     if (tier_now != 70)
     {
         tier_now = tier_now + 1
@@ -1305,6 +1324,13 @@ function solve_chroma(go_back_place) {
                 available_tokens -= pass_arr[tier_now]
                 if (available_tokens <= 0)
                     break
+
+                if(tier_now == 30 && needed_chroma_credits == 4500)
+                {
+                    via_pass = true
+                    job_done = true
+                    break
+                }
                 chroma_credit_amount += chroma_pass_arr[tier_now]
                 all_gold_rewards += gem_gold_pass_arr[tier_now]
                 if (needed_chroma_credits <= chroma_credit_amount)
@@ -1329,6 +1355,25 @@ function solve_chroma(go_back_place) {
                 if (tier_now > 70)
                     break
             }
+        }
+        if(via_pass)
+        {
+            the_sweet_tier = [tier_now, 1]
+            k = tier_now_s
+            needed_tier_tokens = 0
+            while (k <= tier_now)
+            {
+                needed_tier_tokens += pass_arr[k]
+                k += 1
+            }
+            time = (needed_tier_tokens - cur_tok) / one_day_tok
+            time_r = Math.ceil(time)
+
+            days_needed = time_r
+            less_gold = -1
+            more_gold = Math.floor(all_gold_rewards)
+
+            job_done = true
         }
         if(needed_chroma_credits <= chroma_credit_amount)
         {
@@ -1521,7 +1566,12 @@ function solve_chroma(go_back_place) {
     try
     {
         if(the_sweet_tier[1]=='1')
-            the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} this season.<br>`
+        {
+            if(via_pass)
+                the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} this season via brawl pass.<br>`
+            else
+                the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} this season.<br>`
+        }
         else if (the_sweet_tier[1]!=-1)
             the_result.innerHTML += `You'll get ${the_brawler_name} at tier ${the_sweet_tier[0]} next season.<br>`
     }catch(ReferenceError){}
